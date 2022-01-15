@@ -17,9 +17,20 @@ def cpy(srcdir, dest,force=False) -> None:
 			'CLL'			:		f'\033[2K'	,
 	}
 	
+	
+	def robocopy(srcdir,dest) -> None:
+		flags='/E /COPYALL /SJ /SL /L'
+		popen=sproc.Popen(shlex.split(f'robocopy /E /COPY:DATSO /SJ /SL /L {srcdir} {dest}'),stdout=sproc.PIPE,universal_newlines=True)
+		for line in iter(popen.stdout.readline,''):
+			yield '/'.join(line.split('->')[0].split('/')[len(srcdir.split('/')):])
+		popen.stdout.close()
+		return_code=popen.wait()
+		if return_code:
+			raise sproc.CalledProcessError(return_code,cp)
+	
 	def cp(srcdir, dest) -> None:
 		"""
-		copys files form srcdir to dest, returns stdout in pipe in realtime
+		Copies files form srcdir to dest, returns stdout in pipe in realtime
 		"""
 		popen = sproc.Popen(shlex.split(f'cp -rvp{"f" if force else ""} {srcdir} {dest}'), stdout=sproc.PIPE, universal_newlines=True)
 		for line in iter(popen.stdout.readline, ''):
@@ -47,6 +58,8 @@ def cpy(srcdir, dest,force=False) -> None:
 		print(format_line(line))
 		sprint(f"{ANSI['SOL']}{ANSI['CLL']}")
 		return cur
+	
+	cp = robocopy if os.name=='NT' else cp
 	
 	print('Checking:')
 	total = [count(pdf) for pdf in os.walk(srcdir,topdown=True)]
