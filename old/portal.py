@@ -8,9 +8,9 @@ import functools
 import termios
 import tty
 import re
+import types
 
-print("\n")
-timer = timeit.default_timer
+debug_slow=1
 def std_cursorloc():
 
     buf = ""
@@ -46,10 +46,15 @@ def stdwrite_org(ansi):
 		sys.stdout.flush()
 	return stdout_ansi
 def stdwrite_string(text, **k):
+	def dummy(): pass
 	color=k.get('ANSI_Color')
+	fn_pre=k.get('pre') if k.get('pre') else [dummy,]
+	fn_post=k.get('post') if k.get('post') else [dummy,]
 	def stdout_text():
+		[pre() for pre in fn_pre]
 		sys.stdout.write(text)
 		sys.stdout.flush()
+		[post()for post in fn_post]
 	return stdout_text()
 def stdwrite_color(ANSI_color):
 	ansi='\033[{}m'.format(ANSI_color)
@@ -59,112 +64,119 @@ def stdwrite_color(ANSI_color):
 		sys.stdout.flush()
 	return stdout_color
 
-curs_init_row=std_cursorloc()[0]-2
-curs_init_col=std_cursorloc()[1]
 
-org_init=stdwrite_org('\033[{n};{m}H'.format(n=curs_init_row,m=curs_init_col))
-org_startprogress=stdwrite_org('\033[2E\033[2G')
-org_count=stdwrite_org('\033[4G')
-org_header=stdwrite_org('\033[{};1H'.format(curs_init_row))
-org_progress=stdwrite_org('\033[{};1H'.format(curs_init_row+1))
-org_title_1=stdwrite_org('\033[1G')
-org_title_2=stdwrite_org('\033[24G')
-org_title_1_stat=stdwrite_org('\033[{}G'.format(1+11))
-org_title_2_stat=stdwrite_org('\033[{}G'.format(24+12))
+def sns_org(**k):
+	def defaults():
+			k['DEFAULT'] = {'t1': 1, 't2': 24, 'ts': 12}
+			k['t1'] = k.get('t1') or k['DEFAULT'].get('t1')
+			k['t2'] = k.get('t2') or k['DEFAULT'].get('t2')
+			k['ts'] = k.get('ts') or k['DEFAULT'].get('ts')
+	defaults()
+	org = types.SimpleNamespace()
+	curs_init_row=std_cursorloc()[0]
+	curs_init_col=std_cursorloc()[1]
+	org.init						=	stdwrite_org('\033[{n};{m}H'.format(n=(curs_init_row-2),m=curs_init_col))
+	# ROWS:
+	org.header					=	stdwrite_org('\033[{};1H'.format(curs_init_row-2))
+	org.progress				=	stdwrite_org('\033[{};1H'.format((curs_init_row-1)))
+	# COLS
+	org.title_1					=	stdwrite_org('\033[{}G'.format(k.get('t1')))
+	org.title_1_stat		=	stdwrite_org('\033[{}G'.format(k.get('t1')+k.get('ts')))
+	org.title_2					=	stdwrite_org('\033[{}G'.format(k.get('t2')))
+	org.title_2_stat		=	stdwrite_org('\033[{}G'.format(k.get('t2')+k.get('ts')))
+	org.proc						=	stdwrite_org('\033[{}G'.format(k.get('ts')))
+	org.count						=	stdwrite_org('\033[{}G'.format(2+k.get('ts')))
+	return org
 
-col_blink=stdwrite_color('5')
-col_noblink=stdwrite_color('25')
-col_green=stdwrite_color('32')
-col_active=stdwrite_color('31')#38;5;14
-col_reset=stdwrite_color('0')
-col_bold=stdwrite_color('1')
+def sns_clr():
+	clr=types.SimpleNamespace()
+	clr.blink=stdwrite_color('5')
+	clr.noblink=stdwrite_color('25')
+	clr.gray=stdwrite_color('30')
+	clr.red=stdwrite_color('31')#38;5;14
+	clr.green=stdwrite_color('32')
+	clr.yellow=stdwrite_color('33')
+	clr.blue=stdwrite_color('34')
+
+	clr.reset=stdwrite_color('0')
+	clr.bold=stdwrite_color('1')
+	clr.ital=stdwrite_color('2')
+	clr.underline=stdwrite_color('4')
+	clr.inv=stdwrite_color('7')
+	clr.strike=stdwrite_color('9')
+	clr.dunno=stdwrite_color('9')
+	
+	return clr
+
+timer = timeit.default_timer
+print('\n')
+# curs_init_row=std_cursorloc()[0]
+# curs_init_col=std_cursorloc()[1]
+
+org=sns_org()
+clr=sns_clr()
+
+
 
 def cli_init():
-
-	org_init()
-	org_header()
-	org_title_1()
-	col_bold()
-	stdwrite_string('Checking: ')
-	col_reset()
-	stdwrite_string(' ')
-	stdwrite_string('PENDING')
-	stdwrite_string('    ')
-	col_bold()
-	stdwrite_string('Processing: ')
-	col_reset()
-	stdwrite_string('PENDING')
-	org_progress()
-	stdwrite_string('[')
-	col_bold()
-	stdwrite_string('0')
-	col_reset()
+	stdwrite_string('Checking: ',pre=[org.init,	org.header,	org.title_1,clr.bold],post=[clr.reset])
+	stdwrite_string('PENDING',pre=[org.title_1_stat])
+	stdwrite_string('Processing: ',pre=[org.title_2,clr.bold],post=[clr.reset])
+	stdwrite_string('PENDING',pre=[org.title_2_stat])
+	stdwrite_string('Progress: ',pre=[org.progress,clr.bold],)
+	stdwrite_string('[',pre=[clr.reset])
+	stdwrite_string('0',pre=[org.proc,clr.reset])
 	stdwrite_string('/')
-	col_bold()
-	stdwrite_string('0')
-	col_reset()
-	stdwrite_string(']')
-
-def cli_start():
-	org_init()
-	org_header()
-	org_title_1_stat()
-	col_active()
-	col_blink()
-	stdwrite_string('BUSY'.ljust(12," "))
-	col_noblink()
-	col_reset()
+	stdwrite_string('0',pre=[org.count])
+	stdwrite_string(']',post=[clr.reset])
 
 def count(add,tot=[]):
+	global debug_slow
 	tot += [add]
-	org_progress()
-	org_count()
-	col_active()
-	sys.stdout.write(str(sum(tot)))
-	col_reset()
-	stdwrite_string(']')
-	time.sleep(0.01 )
+	stdwrite_string(str(sum(tot)),pre=[org.progress,org.count,clr.red],post=[clr.reset])
+	stdwrite_string(']',pre=[clr.reset],post=[clr.reset])
+	time.sleep(debug_slow)
 	return sum(tot)
 
 def cli_count(path="."):
+	org.progress()
 	total = [count(len(d) + len(f)) for p,d,f in os.walk(path,topdown=True)]
 	return total[-1]-1
-
-def cli_count_done():
-	org_header()
-	org_title_1_stat()
-	col_green()
-	stdwrite_string('Done        ')
-	col_reset()
-	org_title_2()
-	col_bold()
-	stdwrite_string('Processing: ')
-	col_reset()
-	org_title_2_stat()
-	col_active()
-	col_blink()
-	stdwrite_string('BUSY'.rjust(12," "))
-	col_noblink()
-	col_reset()
 
 def cpy(srcdir, dest,force=False) -> None:
 	"""
 	copy progress
 	"""
-	cli_init()
-	cli_start()
+	stdwrite_string('Checking: '					,pre=[org.init,	org.header,	org.title_1,clr.bold],post=[clr.reset])
+	stdwrite_string('PENDING'							,pre=[org.title_1_stat])
+	stdwrite_string('Processing: '				,pre=[org.title_2,clr.bold],post=[clr.reset])
+	stdwrite_string('PENDING'							,pre=[org.title_2_stat])
+	stdwrite_string('Progress: '					,pre=[org.progress,clr.bold],)
+	stdwrite_string('['										,pre=[clr.reset])
+	stdwrite_string('0'										,pre=[org.proc,clr.reset])
+	stdwrite_string('/')
+	stdwrite_string('0'										,pre=[org.count])
+	stdwrite_string(']'										,post=[clr.reset])
+	stdwrite_string('BUSY'.ljust(11," ")	,pre=[org.init,org.header,org.title_1_stat,clr.red,clr.blink],post=[clr.noblink,clr.reset])
 	tot=cli_count(path=srcdir)
-	cli_count_done()
-	org_path=stdwrite_org('\033[{n}G'.format(n=((len(str(tot))*2)+6)))
+	stdwrite_string('Done',pre=[org.header,	org.title_1_stat,	clr.green],post=[clr.reset])
+	stdwrite_string('Processing: ',pre=[org.title_2,clr.bold],post=[clr.reset])
+	stdwrite_string('BUSY'.ljust(12," "),pre=[org.title_2_stat,	clr.red,	clr.blink],post=[clr.noblink,	clr.reset])
+	org.path=stdwrite_org('\033[{n}G'.format(n=((len(str(tot))*2)+36)))
 	start_timer=timer()
-	cur=[progress(path,tot,idx,org_path) for idx,path in enumerate(cp(srcdir, dest))]
+	cur=[progress(path,tot,idx,org.path) for idx,path in enumerate(cp(srcdir, dest))]
 	end_timer=timer()
-	org_header()
-	org_title_2_stat()
-	col_green()
+	org.header()
+	org.title_2_stat()
+	clr.green()
 	stdwrite_string('Done'.ljust(12," "))
-	col_reset()
+	clr.reset()
+	stdwrite_string('Finished: ',pre=[org.progress,org.title_2,clr.bold],post=[clr.reset])
+	stdwrite_string(f'Copied {tot} Files in {end_timer-start_timer} s',pre=[org.title_2_stat,clr.blue],post=[clr.reset])
 	stdwrite_string('\n\n')
+
+
+
 
 def cp(srcdir, dest) -> None:
 	"""
@@ -173,36 +185,34 @@ def cp(srcdir, dest) -> None:
 	cmd = shlex.split(f'cp -rvp {srcdir} {dest}')
 	proc_cp = subprocess.Popen(cmd ,stdout=subprocess.PIPE, universal_newlines=True)
 	for line in iter(proc_cp.stdout.readline, ''):
-		yield '/'.join(line.split('->')[0].split('/')[len(srcdir.split('/')):])
+		yield line.split('->')[0]#'/'.join(line.split('->')[0].split('/')[len(srcdir.split('/')):])
 	proc_cp.stdout.close()
 	return_code = proc_cp.wait()
 	if return_code:
-		raise subprocess.CalledProcessError(return_code, cp)
+		raise subprocess.CalledProcessError(return_code, proc_cp)
 
 def progress(path, tot, cur,loc):
+	global debug_slow
 	cur= str(cur).zfill(len(str(tot)))
 	
 	def format_path(path):
 		termwidth=shutil.get_terminal_size()[0]
-		part1=(2*len(str(tot)))+6
-		if path[(termwidth-((2*len(str(tot)))+6)):]:
-			path=f'...{path[-(termwidth-((2*len(str(tot)))+6))]:}'
-		return path.ljust(termwidth-part1)
+		stringwidth=termwidth-(36+(2*len(str(tot))))
+		if len(path) > (stringwidth-3):
+			path=f'...{path[-(stringwidth-6):]}'
+		return path.rjust(stringwidth-6)
 		
 	ppath=format_path(path)
-	org_progress()
+	stdwrite_string('Progress: ',pre=[org.progress,clr.bold],post=[clr.reset])
 	stdwrite_string('[')
-	stdwrite_string(cur)
+	stdwrite_string(cur,pre=[org.proc,clr.green],post=[clr.reset])
 	stdwrite_string('/')
-	stdwrite_string(str(tot))
+	stdwrite_string(str(tot),pre=[clr.green],post=[clr.reset])
 	stdwrite_string(']')
-	loc()
-	stdwrite_string(ppath)
-	time.sleep(0.02)
+	stdwrite_string('File: ',pre=[org.title_2,clr.bold],post=[clr.reset])
+	stdwrite_string(ppath,pre=[org.title_2_stat,clr.blue],post=[clr.reset])
+	time.sleep(debug_slow)
 	return cur
-
-
-
 
 def rmr(path) -> None:
 	shutil.rmtree(path)
@@ -222,8 +232,6 @@ def link(src,lnk,rel=False) -> None:
 		src=f"{'./' if len(lnk.split('/')[common:-1])<1 else ''}{'/'.join(['..' for folder in lnk.split('/')[common:-1]]+src.split('/')[common:-1]+[os.path.split(src)[1]])}"
 	os.symlink(src,lnk)
 
-
-
 def portal(src, dst, method, force, rel) -> None:
 	ar_dst=os.path.abspath(os.path.realpath(dst)) #a(bsolute)r(eal)_dst
 	if os.path.islink(src):
@@ -242,8 +250,8 @@ def portal(src, dst, method, force, rel) -> None:
 
 
 
+cpy('/home/hoefkens/tmp/', '/home/hoefkens/tmpcopy/')
 
-cpy('/home/hoefkens/.bash/','.')
 
 
 
