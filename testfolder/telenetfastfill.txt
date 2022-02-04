@@ -1,0 +1,7 @@
+
+InputBox, password, Password  
+InputBox, UserInput, Username, UserID:, , 640, 480
+if ErrorLevel
+    MsgBox, CANCEL was pressed.
+else
+    MsgBox, You entered "%UserInput%"

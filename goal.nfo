@@ -1,0 +1,11 @@
+
+simple tool : cli and api
+
+
+cli : portal cp [pathsrc] [pathdst]
+
+	=> copy /path/[src] to /[pathdst]/[src]
+	=> copy /path/parent/[src]
+
+	portal ccp [pathsrc] [pathdst]
+	=> copy /path/src/{$dirs} /[pathdst]/{dirs}

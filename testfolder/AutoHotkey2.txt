@@ -1,0 +1,122 @@
+;autohotkey - map
+;#######################################################
+;
+;--------------------------------------------------------------------
+;       Init Settings
+;--------------------------------------------------------------------
+SetBatchLines 1
+SetKeyDelay -1
+batchSpeed = 0
+keyDelay = 0
+#MaxHotkeysPerInterval 2000000
+
+;--------------------------------------------------------------------
+;       Map
+;--------------------------------------------------------------------
++Volume_Mute::Volume_Mute
++Volume_Down::Volume_Down
++Volume_Up::Volume_Up
+NumpadUp::*
+NumpadLeft::$
+NumpadDown::@
+NumpadClear::|
+NumpadRight::^
+NumpadIns::)
+NumpadDel::_
+NumpadEnd::!
+NumpadHome::&
+NumpadPgDn::#
+NumpadPgUp::(
+
+Browser_Favorites::`
+Browser_Home::{
+Volume_Mute::=
+Volume_Down::-
+Volume_Up::+
+Media_Play_Pause::}
+Launch_Mail::"
+Launch_Media::?
+
+
+
+
+
+!F1::
+ SendMode Input
+ Return
+!F2::
+ SendMode Play
+ Return
+!F3::
+ SendMode InputThenPlay
+ Return
+!F4::
+ SendMode Event
+ Return
+
+!F5::
+ batchSpeed -=1
+ SetBatchLines %batchSpeed%
+ Return
+!F6::
+ batchSpeed +=1
+ SetBatchLines %batchSpeed%
+ Return
+!F7::
+ keyDelay -=1
+ SetKeyDelay %keyDelay%
+ Return
+!F8::
+ keyDelay +=1
+ SetKeyDelay %keyDelay%
+ Return
+
+!Up::
+ MouseMove, 0, -3000, 5, R
+ Return
+
+!Down::
+ MouseMove, 0, 2000, 2, R
+ Return
+
+ 
+$F1::
+ While GetKeyState("F1","P") 
+ { 
+ MouseMove, 1, 0, 0, R
+ MouseMove, -1, 0, 0, R
+ } 
+ Return
+
+
+$F2::
+ While GetKeyState("F2","P") 
+ { 
+ MouseMove, 10, 0, 2, R
+ MouseMove, -10, 0, 2, R
+ } 
+ Return
+
+$F3::
+ While GetKeyState("F3","P") 
+ { 
+ MouseMove, 0, 10, 1, R
+ MouseMove, 0, -10, 1, R
+ } 
+ Return
+
+$F4::
+ While GetKeyState("F4","P") 
+ { 
+ MouseMove, -10, -5, 1, R
+ MouseMove, -5, -10, 1, R
+ MouseMove, 5, -10, 1, R
+ MouseMove, 10, -5, 1, R
+ MouseMove, 10, 5, 1, R
+ MouseMove, 5, 10, 1, R
+ MouseMove, -5, 10, 1, R
+ MouseMove, -10, 5, 1, R
+ }
+ Return
+F9::send Motherlode
+F10::^+C

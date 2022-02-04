@@ -1,0 +1,219 @@
+22:03:04:506 (5952) > --- NIXXES log start ---
+22:03:04:530 (5952) > 
+22:03:04:538 (5952) > Memory statistics:
+22:03:04:547 (5952) >   Total RAM = 3.0 GB (3068 MB)
+22:03:04:555 (5952) >   Avail RAM = 1.3 GB (1356 MB)
+22:03:04:563 (5952) >   Total virtual memory = 4.0 GB (4095 MB)
+22:03:04:572 (5952) >   Avail virtual memory = 3.4 GB (3480 MB)
+22:03:04:580 (5952) > OS = Windows 7 (build 7601)
+22:03:04:588 (5952) > Starting Tomb Raider v1.00.716.5
+22:03:05:106 (5952) > [Main] Current directory: C:\Games\Tomb Rader 2013
+22:03:05:219 (5952) > Mounted TITLE.000
+22:03:05:263 (5952) > Mounted PATCH.000
+22:03:05:579 (5952) > [Render] PCDeviceManager constructor start
+22:03:05:706 (5952) > [Render] PCDeviceManager constructor end
+22:03:06:207 (5952) > [Render] PCDX11DeviceManager constructor start
+22:03:06:230 (5952) > D3D Adapter Information:
+22:03:06:238 (5952) > Adapter Description: NVIDIA GeForce 9600 GT
+22:03:06:246 (5952) > VendorID: 10de
+22:03:06:254 (5952) > DeviceID: 622
+22:03:06:263 (5952) > Revision: a1
+22:03:06:271 (5952) > Attemping to load NVAPI...
+22:03:06:279 (5952) > NVAPI loaded succesfully.
+22:03:06:582 (5952) > Reducing mouse lag by setting frame latency to 1...
+22:03:06:596 (5952) > D3D reports feature level 11 is _not_ supported. Feature level: a000
+22:03:06:631 (5952) > NVAPI Depth Bounds Test supported.
+22:03:06:722 (5952) > [Render] PCDX11DeviceManager constructor end
+22:03:11:206 (5952) > D3D Adapter Information:
+22:03:11:227 (5952) > Adapter Description: NVIDIA GeForce 9600 GT
+22:03:11:235 (5952) > VendorID: 10de
+22:03:11:243 (5952) > DeviceID: 622
+22:03:11:252 (5952) > Revision: a1
+22:03:11:260 (5952) > Attemping to load NVAPI...
+22:03:11:268 (5952) > NVAPI loaded succesfully.
+22:03:11:283 (5952) > Reducing mouse lag by setting frame latency to 1...
+22:03:11:318 (5952) > D3D reports feature level 11 is _not_ supported. Feature level: a000
+22:03:11:327 (5952) > NVAPI Depth Bounds Test supported.
+22:03:11:458 (5952) > [Render] Using DirectX 11
+22:03:12:181 (5952) > Initalizing audio...
+22:03:12:432 (5952) > Audio device found. FMOD reports 2 driver(s).
+22:03:12:451 (5952) > Audio Driver Name: Headphones (High Definition Audio Device)
+22:03:12:459 (5952) > Speaker Mode: 2
+22:03:19:131 (5952) > [DLC] mounted pack 1 - 0x00000001 (steam id=208790)
+22:03:19:175 (5952) > [DLC] mounted pack 1 - 0x00000002 (steam id=208791)
+22:03:19:190 (5952) > [DLC] mounted pack 1 - 0x00000004 (steam id=208792)
+22:03:19:199 (5952) > [DLC] mounted pack 1 - 0x00000008 (steam id=208793)
+22:03:19:207 (5952) > [DLC] mounted pack 1 - 0x00000010 (steam id=208794)
+22:03:19:215 (5952) > [DLC] mounted pack 1 - 0x00010000 (steam id=208795)
+22:03:19:224 (5952) > [DLC] mounted pack 1 - 0x00020000 (steam id=208796)
+22:03:19:232 (5952) > [DLC] mounted pack 1 - 0x00040000 (steam id=208797)
+22:03:19:240 (5952) > [DLC] mounted pack 1 - 0x00100000 (steam id=208798)
+22:03:19:249 (5952) > [DLC] mounted pack 1 - 0x00200000 (steam id=208799)
+22:03:19:257 (5952) > [DLC] mounted pack 1 - 0x00400000 (steam id=208800)
+22:03:19:265 (5952) > [DLC] mounted pack 2 - 0x00000400 (steam id=208801)
+22:03:19:274 (5952) > [DLC] mounted pack 2 - 0x00000800 (steam id=208802)
+22:03:19:282 (5952) > [DLC] mounted pack 2 - 0x00001000 (steam id=208803)
+22:03:19:291 (5952) > [DLC] mounted pack 2 - 0x00002000 (steam id=208804)
+22:03:19:299 (5952) > [DLC] mounted pack 2 - 0x00004000 (steam id=208805)
+22:03:19:307 (5952) > [DLC] mounted pack 2 - 0x00100000 (steam id=208806)
+22:03:19:316 (5952) > [DLC] mounted pack 2 - 0x00200000 (steam id=208807)
+22:03:19:324 (5952) > [DLC] mounted pack 2 - 0x00400000 (steam id=208808)
+22:03:19:332 (5952) > [DLC] mounted pack 2 - 0x10000000 (steam id=208815)
+22:03:19:355 (5952) > [DLC] mounted DLC\PACK8.000 (steam id=208812, pack id=8)
+22:03:19:393 (5952) > [DLC] mounted DLC\PACK4.000 (steam id=208810, pack id=4)
+22:03:55:335 (5952) > Player object AddRef laracroft: 1 => 2
+22:03:55:361 (5952) > Player object AddRef laracroft: 2 => 3
+22:03:55:469 (5952) > Player object AddRef laracroft: 3 => 4
+23:51:09:893 (5952) > Player object RemRef laracroft: 4 => 3
+23:51:09:922 (5952) > Player object RemRef laracroft: 3 => 2
+23:51:09:930 (5952) > Player object RemRef laracroft: 2 => 1
+23:51:12:037 (5952) > Player object AddRef laracroft: 1 => 2
+23:51:12:056 (5952) > Player object AddRef laracroft: 2 => 3
+23:51:12:068 (5952) > Player object AddRef laracroft: 3 => 4
+23:53:34:751 (5952) > Player object RemRef laracroft: 4 => 3
+23:53:34:766 (5952) > Player object RemRef laracroft: 3 => 2
+23:53:34:774 (5952) > Player object RemRef laracroft: 2 => 1
+23:53:36:894 (5952) > Player object AddRef laracroft: 1 => 2
+23:53:36:900 (5952) > Player object AddRef laracroft: 2 => 3
+23:53:36:914 (5952) > Player object AddRef laracroft: 3 => 4
+23:54:16:750 (5952) > Player object RemRef laracroft: 4 => 3
+23:54:16:764 (5952) > Player object RemRef laracroft: 3 => 2
+23:54:16:773 (5952) > Player object RemRef laracroft: 2 => 1
+23:54:18:891 (5952) > Player object AddRef laracroft: 1 => 2
+23:54:18:915 (5952) > Player object AddRef laracroft: 2 => 3
+23:54:18:928 (5952) > Player object AddRef laracroft: 3 => 4
+23:54:44:129 (5952) > Player object RemRef laracroft: 4 => 3
+23:54:44:145 (5952) > Player object RemRef laracroft: 3 => 2
+23:54:44:153 (5952) > Player object RemRef laracroft: 2 => 1
+23:54:46:261 (5952) > Player object AddRef laracroft: 1 => 2
+23:54:46:286 (5952) > Player object AddRef laracroft: 2 => 3
+23:54:46:300 (5952) > Player object AddRef laracroft: 3 => 4
+23:54:52:627 (5952) > Player object RemRef laracroft: 4 => 3
+23:54:52:640 (5952) > Player object RemRef laracroft: 3 => 2
+23:54:52:648 (5952) > Player object RemRef laracroft: 2 => 1
+23:54:54:768 (5952) > Player object AddRef laracroft: 1 => 2
+23:54:54:792 (5952) > Player object AddRef laracroft: 2 => 3
+23:54:54:805 (5952) > Player object AddRef laracroft: 3 => 4
+23:55:34:226 (5952) > Player object RemRef laracroft: 4 => 3
+23:55:34:248 (5952) > Player object RemRef laracroft: 3 => 2
+23:55:34:256 (5952) > Player object RemRef laracroft: 2 => 1
+23:55:36:365 (5952) > Player object AddRef laracroft: 1 => 2
+23:55:36:390 (5952) > Player object AddRef laracroft: 2 => 3
+23:55:36:403 (5952) > Player object AddRef laracroft: 3 => 4
+23:58:31:404 (5952) > Player object RemRef laracroft: 4 => 3
+23:58:31:420 (5952) > Player object RemRef laracroft: 3 => 2
+23:58:31:428 (5952) > Player object RemRef laracroft: 2 => 1
+23:58:33:897 (5952) > Player object AddRef laracroft: 1 => 2
+23:58:33:904 (5952) > Player object AddRef laracroft: 2 => 3
+23:58:33:917 (5952) > Player object AddRef laracroft: 3 => 4
+23:58:54:602 (5952) > Player object RemRef laracroft: 4 => 3
+23:58:54:618 (5952) > Player object RemRef laracroft: 3 => 2
+23:58:54:626 (5952) > Player object RemRef laracroft: 2 => 1
+23:58:57:113 (5952) > Player object AddRef laracroft: 1 => 2
+23:58:57:135 (5952) > Player object AddRef laracroft: 2 => 3
+23:58:57:148 (5952) > Player object AddRef laracroft: 3 => 4
+23:59:47:447 (5952) > Player object RemRef laracroft: 4 => 3
+23:59:47:462 (5952) > Player object RemRef laracroft: 3 => 2
+23:59:47:470 (5952) > Player object RemRef laracroft: 2 => 1
+23:59:49:953 (5952) > Player object AddRef laracroft: 1 => 2
+23:59:49:971 (5952) > Player object AddRef laracroft: 2 => 3
+23:59:50:016 (5952) > Player object AddRef laracroft: 3 => 4
+00:02:04:794 (5952) > Player object RemRef laracroft: 4 => 3
+00:02:04:810 (5952) > Player object RemRef laracroft: 3 => 2
+00:02:04:818 (5952) > Player object RemRef laracroft: 2 => 1
+00:02:09:189 (5952) > Player object AddRef laracroft: 1 => 2
+00:02:09:209 (5952) > Player object AddRef laracroft: 2 => 3
+00:02:09:223 (5952) > Player object AddRef laracroft: 3 => 4
+00:04:08:767 (5952) > Player object RemRef laracroft: 4 => 3
+00:04:08:781 (5952) > Player object RemRef laracroft: 3 => 2
+00:04:08:789 (5952) > Player object RemRef laracroft: 2 => 1
+00:04:12:333 (5952) > Player object AddRef laracroft: 1 => 2
+00:04:12:357 (5952) > Player object AddRef laracroft: 2 => 3
+00:04:12:403 (5952) > Player object AddRef laracroft: 3 => 4
+00:06:23:000 (5952) > Player object RemRef laracroft: 4 => 3
+00:06:23:022 (5952) > Player object RemRef laracroft: 3 => 2
+00:06:23:030 (5952) > Player object RemRef laracroft: 2 => 1
+00:06:25:144 (5952) > Player object AddRef laracroft: 1 => 2
+00:06:25:165 (5952) > Player object AddRef laracroft: 2 => 3
+00:06:25:179 (5952) > Player object AddRef laracroft: 3 => 4
+00:07:35:244 (5952) > Player object RemRef laracroft: 4 => 3
+00:07:35:266 (5952) > Player object RemRef laracroft: 3 => 2
+00:07:35:274 (5952) > Player object RemRef laracroft: 2 => 1
+00:07:37:398 (5952) > Player object AddRef laracroft: 1 => 2
+00:07:37:433 (5952) > Player object AddRef laracroft: 2 => 3
+00:07:37:447 (5952) > Player object AddRef laracroft: 3 => 4
+00:11:31:022 (5952) > Player object RemRef laracroft: 4 => 3
+00:11:31:038 (5952) > Player object RemRef laracroft: 3 => 2
+00:11:31:046 (5952) > Player object RemRef laracroft: 2 => 1
+00:11:33:172 (5952) > Player object AddRef laracroft: 1 => 2
+00:11:33:180 (5952) > Player object AddRef laracroft: 2 => 3
+00:11:33:194 (5952) > Player object AddRef laracroft: 3 => 4
+00:20:55:182 (5952) > Player object RemRef laracroft: 4 => 3
+00:20:55:200 (5952) > Player object RemRef laracroft: 3 => 2
+00:20:55:208 (5952) > Player object RemRef laracroft: 2 => 1
+00:20:57:321 (5952) > Player object AddRef laracroft: 1 => 2
+00:20:57:334 (5952) > Player object AddRef laracroft: 2 => 3
+00:20:57:348 (5952) > Player object AddRef laracroft: 3 => 4
+00:22:04:214 (5952) > Player object RemRef laracroft: 4 => 3
+00:22:04:236 (5952) > Player object RemRef laracroft: 3 => 2
+00:22:04:245 (5952) > Player object RemRef laracroft: 2 => 1
+00:22:06:372 (5952) > Player object AddRef laracroft: 1 => 2
+00:22:06:378 (5952) > Player object AddRef laracroft: 2 => 3
+00:22:06:393 (5952) > Player object AddRef laracroft: 3 => 4
+00:24:28:574 (5952) > Player object RemRef laracroft: 4 => 3
+00:24:28:590 (5952) > Player object RemRef laracroft: 3 => 2
+00:24:28:598 (5952) > Player object RemRef laracroft: 2 => 1
+00:24:30:712 (5952) > Player object AddRef laracroft: 1 => 2
+00:24:30:723 (5952) > Player object AddRef laracroft: 2 => 3
+00:24:30:737 (5952) > Player object AddRef laracroft: 3 => 4
+00:25:10:731 (5952) > Player object RemRef laracroft: 4 => 3
+00:25:10:746 (5952) > Player object RemRef laracroft: 3 => 2
+00:25:10:754 (5952) > Player object RemRef laracroft: 2 => 1
+00:25:12:877 (5952) > Player object AddRef laracroft: 1 => 2
+00:25:12:897 (5952) > Player object AddRef laracroft: 2 => 3
+00:25:12:911 (5952) > Player object AddRef laracroft: 3 => 4
+00:26:53:394 (5952) > Player object RemRef laracroft: 4 => 3
+00:26:53:418 (5952) > Player object RemRef laracroft: 3 => 2
+00:26:53:426 (5952) > Player object RemRef laracroft: 2 => 1
+00:26:55:552 (5952) > Player object AddRef laracroft: 1 => 2
+00:26:55:568 (5952) > Player object AddRef laracroft: 2 => 3
+00:26:55:583 (5952) > Player object AddRef laracroft: 3 => 4
+00:27:08:890 (5952) > Player object RemRef laracroft: 4 => 3
+00:27:08:911 (5952) > Player object RemRef laracroft: 3 => 2
+00:27:08:919 (5952) > Player object RemRef laracroft: 2 => 1
+00:27:11:030 (5952) > Player object AddRef laracroft: 1 => 2
+00:27:11:037 (5952) > Player object AddRef laracroft: 2 => 3
+00:27:11:051 (5952) > Player object AddRef laracroft: 3 => 4
+00:27:58:166 (5952) > Player object RemRef laracroft: 4 => 3
+00:27:58:190 (5952) > Player object RemRef laracroft: 3 => 2
+00:27:58:198 (5952) > Player object RemRef laracroft: 2 => 1
+00:28:00:317 (5952) > Player object AddRef laracroft: 1 => 2
+00:28:00:324 (5952) > Player object AddRef laracroft: 2 => 3
+00:28:00:338 (5952) > Player object AddRef laracroft: 3 => 4
+00:31:38:044 (5952) > Player object RemRef laracroft: 4 => 3
+00:31:38:061 (5952) > Player object RemRef laracroft: 3 => 2
+00:31:38:069 (5952) > Player object RemRef laracroft: 2 => 1
+00:31:40:179 (5952) > Player object AddRef laracroft: 1 => 2
+00:31:40:203 (5952) > Player object AddRef laracroft: 2 => 3
+00:31:40:218 (5952) > Player object AddRef laracroft: 3 => 4
+00:32:13:800 (5952) > Player object RemRef laracroft: 4 => 3
+00:32:13:820 (5952) > Player object RemRef laracroft: 3 => 2
+00:32:13:828 (5952) > Player object RemRef laracroft: 2 => 1
+00:32:15:939 (5952) > Player object AddRef laracroft: 1 => 2
+00:32:15:946 (5952) > Player object AddRef laracroft: 2 => 3
+00:32:15:960 (5952) > Player object AddRef laracroft: 3 => 4
+00:32:39:903 (5952) > Player object RemRef laracroft: 4 => 3
+00:32:39:927 (5952) > Player object RemRef laracroft: 3 => 2
+00:32:39:935 (5952) > Player object RemRef laracroft: 2 => 1
+00:32:42:041 (5952) > Player object AddRef laracroft: 1 => 2
+00:32:42:050 (5952) > Player object AddRef laracroft: 2 => 3
+00:32:42:065 (5952) > Player object AddRef laracroft: 3 => 4
+00:33:05:872 (5952) > Player object RemRef laracroft: 4 => 3
+00:33:05:889 (5952) > Player object RemRef laracroft: 3 => 2
+00:33:05:897 (5952) > Player object RemRef laracroft: 2 => 1
+00:33:08:011 (5952) > Player object AddRef laracroft: 1 => 2
+00:33:08:023 (5952) > Player object AddRef laracroft: 2 => 3
+00:33:08:037 (5952) > Player object AddRef laracroft: 3 => 4
+00:49:01:460 (5952) > Player object RemRef laracroft: 4 => 3
+00:49:01:484 (5952) > Player object RemRef laracroft: 3 => 2
+00:49:01:521 (5952) > Player object RemRef laracroft: 2 => 1

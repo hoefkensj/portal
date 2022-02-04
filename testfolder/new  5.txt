@@ -1,0 +1,23 @@
+########################################
+#						LEFT				
+#=========================================
+#						OUTPUT			
+#-----------------------------------------		
+#	BTN_[01]	::		PitchBend[-]		::		
+#	BTN_[02]	::		PitchBend[+]		::
+#	BTN_[03]	::		View				::
+#	BTN_[04]	::		EQ-Kill[BASS]
+#	BTN_[05]	::		EQ-Kill[MID]
+#	BTN_[06]	::		EQ-Kill[TREBLE]
+#	BTN_[07]	::		Effect
+#	BTN_[08]	::		Loop[MANUAL]													RED: Note On event velocity 1 Yellow:: NoteOn 0<[Velocity]<1
+#	BTN_[09]	::		Loop[IN]
+#	BTN_[10]	::		Loop[OUT]
+#	BTN_[11]	::		Loop[RELOOP]
+#	BTN_[12]	::		Keylock
+#	BTN_[13]	::		Jogweel			
+#	BTN_[14]	::		Scratch
+#	BTN_[15]	::		Sync
+#	BTN_[15]	::		Cue
+#	BTN_[15]	::		PlayPause
+#	BTN_[15]	::		Stutter

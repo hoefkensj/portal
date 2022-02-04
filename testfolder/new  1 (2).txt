@@ -1,0 +1,16 @@
+My Defrag Optimalisation:
+
+Windows:
+
+1.Systemdrive is First Drive ? (exept for EFI or System Reserved)
+	[system partition]{
+		[2x ram for Swap/cache]
+		[hibernation img]
+		-[\BOOT + files for boot + required system drivers + system files needed for full start]
+		-[\Windows (rest)]
+		-[\Program Files \Program Files (x86) \Programdata] [if they are on this drive?] 
+		-[\Users\	.Administrator\	.Public\]
+		-[
+		HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction\Enable
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OptimalLayout\EnableAutoLayout
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters\EnablePrefetcher

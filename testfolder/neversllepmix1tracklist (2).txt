@@ -1,0 +1,37 @@
+###########################################################################
+#		Artist(Dj):			Herr.SnatzeR													#	Date: 					2015-04-24										#
+#		Title:					Never Sleep Mix 1												#	Track-Number:		1											  			#
+#		Album/Set: 		@Amphetamine Fueled MethHead from Hell 		#	Class: 					Techno											 	#
+#		Genre: 				Terror																#	Cat: 						Hardcore, Gabber								#
+#		Duration: 			26:37.909 (70 467 765 samples)						#	File-size: 				210 MB (220 286 498 bytes)			#
+#		----------------------------------------------------------------------------------------------	#	-----------------------------------------------------------------------------------	#
+#		Sample-rate:		44100 Hz															#	Bits-per-sample: 	16													#
+#		Channels:			2	(Stereo)														#	Bitrate: 				1092 kbps										#
+#		Container: 		m4a	(mp4 audio)												#	File-ext: 				m4a	(or mp4)									#
+#		Codec: 				ALAC	(Apple-Lossless-Audio-Codec)					#	Encoding: 				Lossless											#
+#		----------------------------------------------------------------------------------------------	#	-----------------------------------------------------------------------------------	#
+#		File-name: 		Herr.SnatzeR(@AFMHell)_-_Never.Sleep.Mix.I_[ALAC].m4a																			#
+#		----------------------------------------------------------------------------------------------	#	-----------------------------------------------------------------------------------	#
+#		Comment:																				#																						#
+#		Herr.Snatzer						aka 	(dj) 2WeaK         					|	#	name: Hoefkens J.															#
+#		dj2weak@gmail.com				#		herr.snatzer@gmail.com		#	partyflock.nl/user/702877:2Weak									#
+#		twitter.com/dj2weak				#		splice.com/2weak					#	soundcloud.com/2weak													#
+#		thefuture.fm/djs/dj-2weak		#|	http://2weak.netau.net/mybb	#	play.fm/herr-snatzer 														#
+#		----------------------------------------------------------------------------------------------	#	-----------------------------------------------------------------------------------	#
+#		Tacklist:	-----------------------------------------------------------------------------------------------------------------------------------------------------------------------	#
+#		ID		#		Start			#			Track Title										#				Track Artist														#
+#		01	:		00'00"		:		Puta Madre (Extremo)						:			Sandy Warez															#
+#		02	:		00'29"		:		Crime Partners									:			Partyraiser & Darkcontroller 									#
+#		03	:		03'04"		:		We Do Not Care 								:		 	Darkcontroller & Djane Rvt 									#
+#		04	:		04'40"		:		Barakis Keteur									:			Da Horseman														#
+#		05	:		07'13"		:		Provision Tribute								:			Stinger 																	#
+#		06	:		10'08"		:		Depths Of Truth								:			Crossfiyah																#
+#		07	:		12'18"		:		Grand Design									:			Lunatic & Miss Hysteria 											#
+#		08	:		15'44"		:		The Abomination								:			T-Junction & Rudeboy												#
+#		09	:		16'58"		:		Da Exclusif										:			Lenny Dee 															#
+#		10	:		18'06"		:		Dedication			 								:			Quitara																	#
+#		11	:		18'59"		:		Bullet in Your Brain								:			Al Twisted & Sleeper Cell   										#
+#		12	:		19'42"		:		Ik Schiet Je Kapot								:			Noisekick																#
+#		13	:		21'24"		:		Puta Madre (Extremo)						:		 	Sandy Warez															#
+#		14	:		22'30"		:		Policia (the Vizitor & S'aphira Remix)	:			Section Grabudge													#
+#		######################################################################	#

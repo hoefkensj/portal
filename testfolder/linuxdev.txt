@@ -1,0 +1,13 @@
+bluefish 
+Anjuta DevStudio
+Aptana
+ Eclipse
+ Quanta Plus
+ glade
+ screem
+ amaya
+ CSSED
+ tidy
+ 
+ http://pear.php.net/package/PHP_Beautifier
+ http://home.gna.org/colorscheme/

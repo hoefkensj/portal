@@ -1,0 +1,298 @@
+DisplayName                                                    DisplayVersion Publisher                          InstallDate
+-----------                                                    -------------- ---------                          -----------
+Adobe AIR                                                      21.0.0.176     Adobe Systems Incorporated
+Adobe Flash Player 21 NPAPI                                    21.0.0.242     Adobe Systems Incorporated
+Advanced Renamer                                               3.64           Hulubulu Software                  20160316
+Ampps 3.4                                                                     Softaculous Ltd.                   20160426
+Angry IP Scanner                                               3.4.1          Angry IP Scanner
+ASIO4ALL                                                       2.12           Michael Tippach
+AutoHotkey 1.0.48.05                                           1.0.48.05      Chris Mallett
+AVI Splitter
+Avidemux 2.6 - 64 bits                                         2.6.12.160304
+Burnout Paradise Ultimate Box version 1.00.00.1                1.00.00.1      Mr DJ                              20160712
+Camel Audio CamelPhat                                          3.50.0         Camel Audio
+Camel Audio CamelPhat64                                        3.50.0         Camel Audio
+Cheat Engine 6.5                                                              Cheat Engine                       20160307
+Collab                                                                        Image-Line bvba
+
+Creation Master 16.0                                                          FIFA MASTER                        20160703
+Deckadance                                                                    Image-Line
+Deckadance 2                                                   2.0            Image-Line
+Droid4X                                                        0.9.0          Haiyu Dongxiang Co.,Ltd.
+Drumaxx                                                                       Image-Line
+DUNE 2                                                                        Synapse Audio Software             20160307
+DX10                                                                          Image-Line
+EaseUS Partition Master 10.8 Trial Edition                                    EaseUS                             20160304
+EasyBCD 2.3                                                    2.3            NeoSmart Technologies
+Edison                                                                        Image-Line
+FabFilter_Twin_VSTi_v1.20-READ_NFO-PLZ
+FIFA 15 v.1.8.0.0 ModdingWay v.3.1.1                                                                             20160629
+File Master Version 15.0                                                      FIFA MASTER                        20160703
+Filtrate LE 1.004                                              1.004          LiquidSonics
+Filtrate LE (GPU Edition) 1.004                                1.004          LiquidSonics
+FL Studio 10                                                                  Image-Line
+FL Studio 11                                                                  Image-Line
+FL Studio 6                                                                   Image-Line bvba
+FL Studio 8                                                                   Image-Line bvba
+FL Studio 9                                                                   Image-Line
+FL Studio ASIO                                                                Image-Line
+FlowStone FL 3.0
+FreeCommander XE                                                              Marek Jasinski                     20160305
+FruityLoops v3.56 Full
+Google Chrome                                                  51.0.2704.103  Google Inc.                        20160303
+Gpg4win (2.3.1)                                                2.3.1          The Gpg4win Project
+GPL Ghostscript                                                9.09           Artifex Software Inc.
+Groove Machine                                                                Image-Line
+Guitar Pro 5.0                                                                Arobas Music
+Hardcore                                                                      Image-Line bvba
+HOFA-Plugins Uninstall                                                        HOFA-Plugins
+IL Autogun                                                                    Image-Line
+IL Download Manager                                                           Image-Line
+IL DrumSynth Live                                                             Image-Line
+IL Gross Beat                                                                 Image-Line
+IL Harmless                                                                   Image-Line
+IL Harmor                                                                     Image-Line
+IL Juice Pack                                                                 Image-Line
+IL MiniHost                                                                   Image-Line
+IL Ogun                                                                       Image-Line
+IL Shared Libraries                                                           Image-Line
+IL Slicex                                                                     Image-Line
+IL Vocodex                                                                    Image-Line
+iMap 1.01
+imitone beta 0.8.1 (remove only)
+License Support                                                1.2.0.5555     PACE Anti-Piracy, Inc.             20160318
+MSI Remind Manager                                             1.0.1506.0801  Micro-Star International Co., Ltd. 20150806
+Battery Calibration                                            1.0.1505.2901  Micro-Star International Co., Ltd. 20150806
+Help Desk                                                      1.0.1602.1801  Micro-Star International Co., Ltd. 20160302
+BurnRecovery                                                   5.0.1507.1901  Application                        20150806
+Dragon Gaming Center                                           1.0.1501.2801  Micro-Star International Co., Ltd. 20150806
+CyberLink PowerDVD 10                                          10.0.5509.52   CyberLink Corp.                    20150806
+Visual C++ Redistributables                                    1.2.0.5555     PACE Anti-Piracy, Inc.             20160318
+Visual C++ 64-bit Redistributables                             1.2.0.5555     PACE Anti-Piracy, Inc.             20160318
+IObit Uninstaller                                              5.3.0.138      IObit                              20160412
+iZotope Ozone 6 Advanced                                       6.01           iZotope, Inc.                      20160317
+iZotope Trash 2                                                2.00           iZotope, Inc.                      20160428
+iZotope Vinyl for DirectX and ProTools                         1.6            iZotope, Inc.
+JBridge                                                                       JBridge
+Security Update for CAPICOM (KB931906)                         2.1.0.2        Microsoft Corporation
+LAME v3.99.3 (for Windows)                                                                                       20160413
+Lennar Digital Sylenth VSTi v1.2.1
+LinuxLive USB Creator                                          2.9            Thibaut Lauziere
+Live 8.0.1
+Live 8.2.2
+LoopBe1 - Internal MIDI Port
+Hurchalla Key Switches/Split Plug-ins version 3.56             3.56           Hurchalla
+Maximus                                                                       Image-Line
+MEGAsync                                                                      Mega Limited
+MeldaProduction Audio Plugins 10                                              MeldaProduction
+MeldaProduction Audio Plugins 9                                               MeldaProduction
+Morphine                                                                      Image-Line bvba
+Mozilla Firefox 47.0 (x86 nl)                                  47.0           Mozilla
+Native Instruments Absynth 5                                                  Native Instruments
+Native Instruments Controller Editor                                          Native Instruments
+Native Instruments FM8
+Native Instruments Guitar Rig 5                                               Native Instruments
+Native Instruments Guitar Rig Mobile I/O                                      Native Instruments
+Native Instruments Guitar Rig Session I/O                                     Native Instruments
+Native Instruments Massive                                                    Native Instruments
+Native Instruments Rig Kontrol 3                                              Native Instruments
+Native Instruments Service Center                                             Native Instruments
+Need For Speed Shift version 1.2.0.0                           1.2.0.0        Mr DJ                              20160613
+Notepad++                                                      6.9.2          Notepad++ Team
+ocenaudio                                                      3.0.9          ocenaudio Team
+Ohm Force - Ohmicide VST
+Open Broadcaster Software
+OpenAL
+Origin                                                         9.12.1.43352   Electronic Arts, Inc.
+PoiZone                                                                       Image-Line
+PowerISO                                                       5.6            Power Software Ltd
+PSP VintageMeter 32bit                                         1.0.0 32bit    PSPaudioware.com
+PSP Xenon                                                      1.5.1          PSPaudioware.com
+qBittorrent 3.3.4                                              3.3.4          The qBittorrent project
+REAPER
+Reason 5.0                                                     5.0            Propellerhead Software AB          20160305
+Rebeat                                                         1.0016.5       Rebeat                             20160307
+Rejoice v1.6                                                   v1.6           Fireball Trailers
+Riot - Radical Image Optimization Tool
+Roger Nichols Digital DETAILER VST RTAS v1.2                                  Team AiR 2007
+Sakura                                                                        Image-Line
+Samplitude 10 SE 10.2.1.0 (US)                                 10.2.1.0       MAGIX AG                           20160414
+Sawer                                                                         Image-Line
+SimSynth                                                                      Image-Line
+SolveigMM AVI Trimmer+ version 5.0.1603.23                     5.0.1603.23    Solveig Multimedia                 20160624
+
+SolveigMM Video Splitter Home Edition                          5.0.1509.11    Solveig Multimedia                 06/24/2016
+Sonitus:fx Plugin Suite
+SPL Analog Code Bundle v1.1                                                                                      20160307
+Sytrus                                                                        Image-Line
+Tomahawk                                                       0.8.4          Tomahawk-player.org
+Tone2 AkustiX Enhancer v1.0 X64                                               Tone2                              20160317
+Tone2 AkustiX Enhancer v1.0                                                   Tone2                              20160317
+ElectraX Dance and Trance Soundset                                            Tone2                              20160317
+ElectraX full                                                                 Tone2                              20160317
+ElectraX Morphing Soundset                                                    Tone2                              20160317
+ElectraX Vintage Soundset                                                     Tone2                              20160317
+ElectraX Voltage Soundset                                                     Tone2                              20160317
+ElectraX Wavetables Expansion                                                 Tone2                              20160317
+FilterBank v3.3                                                               Tone2                              20160317
+FireBird plus v1.11.2                                                         Tone2                              20160317
+Gladiator  full                                                               Tone2                              20160317
+Saurus v1.0                                                                   Tone2                              20160427
+Toxic Biohazard                                                               Image-Line bvba
+u-he ACE                                                       1.4.0.3898     u-he
+u-he Bazille                                                   1.1.0.3898     u-he
+u-he Diva                                                      1.4.0.3898     u-he
+u-he Filterscape                                               1.4.1.3898     u-he
+u-he Hive                                                      1.1.0.3898     u-he
+u-he MFM2                                                      2.2.1.3898     u-he
+u-he Presswerk                                                 1.1.0.3471     u-he
+ASIO Bridge and Hi-Fi Cable                                                   VB-Audio Software
+Voicemeeter, The Virtual Mixing Console                                       VB-Audio Software
+VLC media player                                               2.2.2          VideoLAN
+VMware Workstation                                             11.0.0         VMware, Inc                        197011
+Wasp                                                                          Image-Line bvba
+Waves Complete VST RTAS TDM v7.1.16                                                                              20160712
+Waves Mercury Bundle                                           5.0            Team AiR
+
+WWAYM - NWMaxx
+Ableton Live 9 Suite                                           9.0.0.0        Ableton                            20160307
+tools-freebsd                                                  9.9.0.2305329  VMware, Inc.                       20160423
+CyberLink YouCam 7                                             7.0.0824.0     CyberLink Corp.
+
+Microsoft Visual C++ 2013 Redistributable (x64) - 12.0.30501   12.0.30501.0   Microsoft Corporation
+
+
+                                                                                                                 197011
+Security Update for CAPICOM (KB931906)                         2.1.0.2        Microsoft Corporation              20160311
+Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.21005     12.0.21005     Microsoft Corporation              20160702
+Avid DIO Runtime                                               6.1.0          Avid Technology, Inc.              20160322
+WD Drive Utilities                                             1.2.0.85       Western Digital Technologies, Inc.
+Adobe AIR                                                      21.0.0.176     Adobe Systems Incorporated         20160310
+tools-netware                                                  9.9.0.2305329  VMware, Inc.                       20160423
+
+
+
+
+
+
+
+Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.4148 9.0.30729.4148 Microsoft Corporation              20160423
+PDF Settings CC                                                12.0           Adobe Systems Incorporated         20160308
+Nahimic for MSI                                                1.2.2          Nahimic
+dupeGuru Music Edition                                         6.7.0          Hardcoded Software                 20160312
+WD Drive Utilities                                             1.2.0.85       Western Digital Technologies, Inc. 20160711
+
+Java 8 Update 91                                               8.0.910.15     Oracle Corporation                 20160708
+Minimal ADB and Fastboot version 1.3.1                         1.3.1          Sam Rodberg                        20160327
+
+Avid Core Runtime                                              6.1.0          Avid Technology, Inc.              20160322
+Adobe Photoshop CC                                             14.0           Adobe Systems Incorporated
+MSVCRT Redists                                                 1.0            Sony Creative Software Inc.        20160406
+Microsoft Visual C++ 2012 Redistributable (x86) - 11.0.61030   11.0.61030.0   Microsoft Corporation
+Noise Reduction Plug-In 2.0                                    2.0.628        Sony                               20160406
+
+Fergo JoystickMIDI 1.0.48                                                     Fergo                              20160703
+MSI Remind Manager                                             1.0.1601.2201  Micro-Star International Co., Ltd. 20160628
+Microsoft Visual C++ 2015 Redistributable (x64) - 14.0.23506   14.0.23506.0   Microsoft Corporation
+Sound Forge Pro 11.0                                           11.0.299       Sony                               20160406
+Microsoft ASP.NET MVC 4 Runtime                                4.0.40804.0    Microsoft Corporation              20160307
+System Explorer 7.0.0                                                         Mister Group                       20160407
+WD Backup                                                      1.0.5556.3650  Western Digital Technologies, Inc  20160711
+Apple Application Support                                      2.3.6          Apple Inc.                         20160327
+Steinberg Drum Loop Expansion 01                               1.0.0.1        Steinberg Media Technologies GmbH  20160305
+
+Java Auto Updater                                              2.8.91.15      Oracle Corporation                 20160708
+Steinberg Cubase 5                                             5.1.2          Steinberg Media Technologies GmbH  20160307
+Intel® Security Assist                                         1.0.0.532      Intel Corporation                  20150806
+Steinberg LoopMash Content                                     1.0.0.005      Steinberg Media Technologies GmbH  20160305
+Max 7                                                          7.0.3          Cycling '74                        20160407
+Steinberg REVerence Content 01                                 1.0.0.006      Steinberg Media Technologies GmbH  20160305
+Adobe Update Management Tool                                   6.2            PainteR                            20160308
+loopMIDI                                                       1.0.13.24      Tobias Erichsen
+
+Realtek Card Reader                                            6.3.9600.31213 Realtek Semiconductor Corp.        20150806
+Google Update Helper                                           1.3.30.3       Google Inc.                        20160511
+Episodes From Liberty City v1.1 / RePack by Baracuda                                                             20160713
+Battery Calibration                                            1.0.1505.2901  Micro-Star International Co., Ltd. 20150806
+WD Backup                                                      1.0.5556.3650  Western Digital Technologies, Inc.
+Microsoft Visual C++ 2005 Redistributable                      8.0.61001      Microsoft Corporation              20160307
+Microsoft Visual C++ 2005 Redistributable                      8.0.56336      Microsoft Corporation              20160322
+Apple Software Update                                          2.1.3.127      Apple Inc.                         20160327
+
+MSI Social Media Collection                                    1.14.2251      Micro-Star International Co., Ltd. 20150806
+SUPER CHARGER                                                  1.2.024        MSI                                20150806
+Help Desk                                                      1.0.1602.1801  Micro-Star International Co., Ltd. 20160302
+NVIDIA PhysX                                                   9.13.1220      NVIDIA Corporation                 20160613
+Google Earth                                                   7.1.5.1557     Google                             20160710
+Microsoft Visual C++ 2005 Redistributable                      8.0.59193      Microsoft Corporation              20160310
+Steinberg HALionOne Studio Drum Set                            1.0.1.457      Steinberg Media Technologies GmbH  20160305
+Spire-1.1 Plug-In (x86)                                        1.1.1.0        Reveal Sound Ltd.                  20160307
+Avid Pro Tools                                                 10.3.2         Avid Technology, Inc.              20160322
+
+Waves Complete V9r15                                           9.1.15         Waves                              20160406
+BurnRecovery                                                   5.0.1507.1901  Application                        20150806
+MusicScope version 1.5.1                                       1.5.1          XiVero GmbH                        20160406
+Bitwig Studio                                                  1.1.8          Bitwig GmbH                        20160317
+Dragon Gaming Center                                           1.0.1501.2801  Micro-Star International Co., Ltd. 20150806
+WD Quick View                                                  2.4.10.17      Western Digital Technologies, Inc. 20160711
+Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.17   9.0.30729      Microsoft Corporation              20160304
+
+dupeGuru Picture Edition                                       2.9.0          Hardcoded Software                 20160623
+Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161 9.0.30729.6161 Microsoft Corporation              20160307
+loopMIDI                                                       1.0.13.24      Tobias Erichsen                    20160412
+Microsoft Visual C++ 2012 Redistributable (x64) - 11.0.60610   11.0.60610.1   Microsoft Corporation
+Smart View                                                     1.0.0.0        Samsung                            20160412
+MIDI-OX                                                        7.02.372       MIDIOX Computing                   20160407
+Boot Configure                                                 20.015.07202   Micro-Star International Co., Ltd. 20150806
+Avid Effects                                                   10.3.2         Avid Technology, Inc.              20160322
+Google Update Helper                                           1.3.21.115     Google Inc.                        20160303
+tools-solaris                                                  9.9.0.2305329  VMware, Inc.                       20160423
+Intel(R) WiDi Software Asset Manager                           3.2.1184       Intel Corporation                  20160503
+Steinberg HALionOne GM Drum Set                                1.0.1.457      Steinberg Media Technologies GmbH  20160305
+tools-winPre2k                                                 9.9.0.2305329  VMware, Inc.                       20160423
+loopMIDIBlockLegacy                                            9.9.9.9        Tobias Erichsen                    20160412
+Bias Plugins Pack (32bit)                                      1.1.0.374      PositiveGrid                       20160307
+Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.61030  11.0.61030     Microsoft Corporation              20160310
+WD Security                                                    1.2.0.83       Western Digital Technologies, Inc.
+
+Steinberg Groove Agent ONE Content                             1.0.0.003      Steinberg Media Technologies GmbH  20160305
+Microsoft Visual C++ 2012 x86 Minimum Runtime - 11.0.61030     11.0.61030     Microsoft Corporation              20160310
+Intel(R) Chipset Device Software                               10.1.1.8       Intel(R) Corporation
+Intel® PROSet/Wireless Software                                18.11.0        Intel Corporation
+Microsoft Visual C++ 2012 Redistributable (x64) - 11.0.61030   11.0.61030.0   Microsoft Corporation
+Sony Sound Forge 9.0                                           9.0.405        Sony                               20160327
+Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.21005   12.0.21005.1   Microsoft Corporation
+VirtualDJ 8                                                    8.0.2438.0     Atomix Productions                 20160412
+FIFA 16 Demo                                                   1.0.0.0        Electronic Arts
+tools-linux                                                    9.9.0.2305329  VMware, Inc.                       20160423
+Steinberg HALionOne Studio Set                                 1.0.1.457      Steinberg Media Technologies GmbH  20160305
+Logitech Webcam Software                                       2.80           Logitech Inc.
+XSplit Gamecaster                                              2.4.1506.1243  SplitmediaLabs                     20150806
+Steinberg HALionOne Pro Set                                    1.0.1.457      Steinberg Media Technologies GmbH  20160305
+Ableton Live 9 Suite                                           9.0.0.0        Ableton                            20160710
+Intel(R) Wireless Bluetooth(R)                                 17.1.1524.1353 Intel Corporation                  20150806
+CyberLink PowerDVD 10                                          10.0.5509.52   CyberLink Corp.                    20150806
+Steinberg HALionOne Expression Set                             1.0.1.0        Steinberg Media Technologies GmbH  20160305
+WD Security                                                    1.2.0.83       Western Digital Technologies, Inc. 20160711
+Killer Performance Suite                                       1.1.54.1095    Rivet Networks
+Steinberg HALionOne                                            1.1.0.457      Steinberg Media Technologies GmbH  20160305
+Ableton Live 9 Suite                                           9.0.0.0        Ableton                            20160307
+Visual C++ Redistributables                                    1.2.0.5555     PACE Anti-Piracy, Inc.             20160318
+Steinberg HALionOne GM Set                                     1.0.1.457      Steinberg Media Technologies GmbH  20160305
+Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219    10.0.40219     Microsoft Corporation              20160322
+
+
+
+
+
+
+
+Realtek High Definition Audio Driver                           6.0.1.7848     Realtek Semiconductor Corp.        20160711
+Steinberg HALionOne Additional Content Set 01                  1.0.0.001      Steinberg Media Technologies GmbH  20160305
+Epic Games Launcher                                            1.1.58.0       Epic Games, Inc.                   20160304
+Piriform CCleaner Professional version 5.16.5551               5.16.5551                                         20160407
+Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.30501   12.0.30501.0   Microsoft Corporation
+Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.21005  12.0.21005     Microsoft Corporation              20160702
+rtpMIDIBlockLegacy                                             9.9.9.9        Tobias Erichsen                    20160412
+QuickTime 7                                                    7.79.80.95     Apple Inc.                         20160327
+tools-windows                                                  9.9.0.2305329  VMware, Inc.                       20160423

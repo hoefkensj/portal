@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from . import cli
+import portal.interface
 
 if __name__ == '__main__':
-	cli.cli()
+	portal.interface.ui.cli.entry_point()

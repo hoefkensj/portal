@@ -1,0 +1,24 @@
+Error Opening \\.\PhysicalDrive4. Error Code 2
+No of disks 4
+Scanning \\.\PhysicalDrive0
+index 0 ID 7 size 252688384 
+index 1 ID 7 size 631351296 
+Scanning \\.\PhysicalDrive1
+index 0 ID 7 size 15644672 
+Scanning \\.\PhysicalDrive2
+index 0 ID EE size 488395054 
+Scanning \\.\PhysicalDrive3
+index 0 ID 7 size 15769600 
+Error Opening \\.\PhysicalDrive4. Error Code 2
+No of disks 4
+Scanning \\.\PhysicalDrive0
+index 0 ID 7 size 252688384 
+index 1 ID 7 size 631351296 
+Scanning \\.\PhysicalDrive1
+index 0 ID 7 size 15644672 
+Scanning \\.\PhysicalDrive2
+index 0 ID EE size 488395054 
+Scanning \\.\PhysicalDrive3
+index 0 ID 7 size 15769600 
+Error Opening . Error Code 3
+No valid Ext2 Partitions found in the disk image.
