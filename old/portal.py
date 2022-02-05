@@ -1,16 +1,14 @@
 #!/usr/bin/env python
 import os,sys,shlex,shutil
 import subprocess
-import multiprocessing
 import time
 import timeit
-import functools
 import termios
 import tty
 import re
 import types
 
-debug_slow=1
+debug_slow=0
 def std_cursorloc():
 
     buf = ""
@@ -38,8 +36,6 @@ def std_cursorloc():
         return None
 
     return (int(groups[0]), int(groups[1]))
-
-
 def stdwrite_org(ansi):
 	def stdout_ansi():
 		sys.stdout.write(ansi)
@@ -87,7 +83,6 @@ def sns_org(**k):
 	org.proc						=	stdwrite_org('\033[{}G'.format(k.get('ts')))
 	org.count						=	stdwrite_org('\033[{}G'.format(2+k.get('ts')))
 	return org
-
 def sns_clr():
 	clr=types.SimpleNamespace()
 	clr.blink=stdwrite_color('5')
@@ -107,46 +102,60 @@ def sns_clr():
 	clr.dunno=stdwrite_color('9')
 	
 	return clr
-
-timer = timeit.default_timer
 print('\n')
-# curs_init_row=std_cursorloc()[0]
-# curs_init_col=std_cursorloc()[1]
 
 org=sns_org()
 clr=sns_clr()
-
-
-
-def cli_init():
-	stdwrite_string('Checking: ',pre=[org.init,	org.header,	org.title_1,clr.bold],post=[clr.reset])
-	stdwrite_string('PENDING',pre=[org.title_1_stat])
-	stdwrite_string('Processing: ',pre=[org.title_2,clr.bold],post=[clr.reset])
-	stdwrite_string('PENDING',pre=[org.title_2_stat])
-	stdwrite_string('Progress: ',pre=[org.progress,clr.bold],)
-	stdwrite_string('[',pre=[clr.reset])
-	stdwrite_string('0',pre=[org.proc,clr.reset])
-	stdwrite_string('/')
-	stdwrite_string('0',pre=[org.count])
-	stdwrite_string(']',post=[clr.reset])
-
-def count(add,tot=[]):
-	global debug_slow
-	tot += [add]
-	stdwrite_string(str(sum(tot)),pre=[org.progress,org.count,clr.red],post=[clr.reset])
-	stdwrite_string(']',pre=[clr.reset],post=[clr.reset])
-	time.sleep(debug_slow)
-	return sum(tot)
-
-def cli_count(path="."):
-	org.progress()
-	total = [count(len(d) + len(f)) for p,d,f in os.walk(path,topdown=True)]
-	return total[-1]-1
 
 def cpy(srcdir, dest,force=False) -> None:
 	"""
 	copy progress
 	"""
+	def cli_count(path="."):
+		org.progress()
+		total = [count(len(d) + len(f)) for p,d,f in os.walk(path,topdown=True)]
+		return total[-1]-1
+	def count(add,tot=[]):
+		global debug_slow
+		tot += [add]
+		stdwrite_string(str(sum(tot)),pre=[org.progress,org.count,clr.red],post=[clr.reset])
+		stdwrite_string(']',pre=[clr.reset],post=[clr.reset])
+		time.sleep(debug_slow)
+		return sum(tot)
+	def cp(srcdir, dest) -> None:
+		"""
+		copys files form srcdir to dest, returns stdout in pipe in realtime
+		"""
+		cmd = shlex.split(f'cp -rvp {srcdir} {dest}')
+		proc_cp = subprocess.Popen(cmd ,stdout=subprocess.PIPE, universal_newlines=True)
+		for line in iter(proc_cp.stdout.readline, ''):
+			yield line.split('->')[0]#'/'.join(line.split('->')[0].split('/')[len(srcdir.split('/')):])
+		proc_cp.stdout.close()
+		return_code = proc_cp.wait()
+		if return_code:
+			raise subprocess.CalledProcessError(return_code, proc_cp)
+	def progress(path, tot, cur):
+		global debug_slow
+		cur= str(cur).zfill(len(str(tot)))
+		def format_path(path):
+			termwidth=shutil.get_terminal_size()[0]
+			stringwidth=termwidth-(36+(2*len(str(tot))))
+			if len(path) > (stringwidth-3):
+				path=f'...{path[-(stringwidth-6):]}'
+			return path.rjust(stringwidth-6)
+		ppath=format_path(path)
+		stdwrite_string('Progress: '				,pre=[org.progress,clr.bold],post=[clr.reset])
+		stdwrite_string('[')
+		stdwrite_string(cur									,pre=[org.proc,clr.green],post=[clr.reset])
+		stdwrite_string('/')
+		stdwrite_string(str(tot)						,pre=[clr.green],post=[clr.reset])
+		stdwrite_string(']')
+		stdwrite_string('File: '						,pre=[org.title_2,clr.bold],post=[clr.reset])
+		stdwrite_string(ppath								,pre=[org.title_2_stat,clr.blue],post=[clr.reset])
+		time.sleep(debug_slow)
+		return cur
+	
+	
 	stdwrite_string('Checking: '					,pre=[org.init,	org.header,	org.title_1,clr.bold],post=[clr.reset])
 	stdwrite_string('PENDING'							,pre=[org.title_1_stat])
 	stdwrite_string('Processing: '				,pre=[org.title_2,clr.bold],post=[clr.reset])
@@ -159,60 +168,25 @@ def cpy(srcdir, dest,force=False) -> None:
 	stdwrite_string(']'										,post=[clr.reset])
 	stdwrite_string('BUSY'.ljust(11," ")	,pre=[org.init,org.header,org.title_1_stat,clr.red,clr.blink],post=[clr.noblink,clr.reset])
 	tot=cli_count(path=srcdir)
-	stdwrite_string('Done',pre=[org.header,	org.title_1_stat,	clr.green],post=[clr.reset])
-	stdwrite_string('Processing: ',pre=[org.title_2,clr.bold],post=[clr.reset])
-	stdwrite_string('BUSY'.ljust(12," "),pre=[org.title_2_stat,	clr.red,	clr.blink],post=[clr.noblink,	clr.reset])
-	org.path=stdwrite_org('\033[{n}G'.format(n=((len(str(tot))*2)+36)))
-	start_timer=timer()
-	cur=[progress(path,tot,idx,org.path) for idx,path in enumerate(cp(srcdir, dest))]
-	end_timer=timer()
-	org.header()
-	org.title_2_stat()
-	clr.green()
-	stdwrite_string('Done'.ljust(12," "))
-	clr.reset()
-	stdwrite_string('Finished: ',pre=[org.progress,org.title_2,clr.bold],post=[clr.reset])
+	stdwrite_string('Done'								,pre=[org.header,	org.title_1_stat,	clr.green],post=[clr.reset])
+	stdwrite_string('Processing: '				,pre=[org.title_2,clr.bold],post=[clr.reset])
+	stdwrite_string('BUSY'.ljust(12," ")	,pre=[org.title_2_stat,	clr.red,	clr.blink],post=[clr.noblink,	clr.reset])
+	start_timer=timeit.default_timer()
+	cur=[progress(path,tot,idx) for idx,path in enumerate(cp(srcdir, dest))]
+	end_timer=timeit.default_timer()
+	stdwrite_string('Done'.ljust(12," ")	,pre=[org.header,	org.title_2_stat,clr.green],post=[clr.reset])
+	stdwrite_string('Finished: '					,pre=[org.progress,org.title_2,clr.bold],post=[clr.reset])
 	stdwrite_string(f'Copied {tot} Files in {end_timer-start_timer} s',pre=[org.title_2_stat,clr.blue],post=[clr.reset])
 	stdwrite_string('\n\n')
 
 
 
 
-def cp(srcdir, dest) -> None:
-	"""
-	copys files form srcdir to dest, returns stdout in pipe in realtime
-	"""
-	cmd = shlex.split(f'cp -rvp {srcdir} {dest}')
-	proc_cp = subprocess.Popen(cmd ,stdout=subprocess.PIPE, universal_newlines=True)
-	for line in iter(proc_cp.stdout.readline, ''):
-		yield line.split('->')[0]#'/'.join(line.split('->')[0].split('/')[len(srcdir.split('/')):])
-	proc_cp.stdout.close()
-	return_code = proc_cp.wait()
-	if return_code:
-		raise subprocess.CalledProcessError(return_code, proc_cp)
-
-def progress(path, tot, cur,loc):
-	global debug_slow
-	cur= str(cur).zfill(len(str(tot)))
-	
-	def format_path(path):
-		termwidth=shutil.get_terminal_size()[0]
-		stringwidth=termwidth-(36+(2*len(str(tot))))
-		if len(path) > (stringwidth-3):
-			path=f'...{path[-(stringwidth-6):]}'
-		return path.rjust(stringwidth-6)
-		
-	ppath=format_path(path)
-	stdwrite_string('Progress: ',pre=[org.progress,clr.bold],post=[clr.reset])
-	stdwrite_string('[')
-	stdwrite_string(cur,pre=[org.proc,clr.green],post=[clr.reset])
-	stdwrite_string('/')
-	stdwrite_string(str(tot),pre=[clr.green],post=[clr.reset])
-	stdwrite_string(']')
-	stdwrite_string('File: ',pre=[org.title_2,clr.bold],post=[clr.reset])
-	stdwrite_string(ppath,pre=[org.title_2_stat,clr.blue],post=[clr.reset])
-	time.sleep(debug_slow)
-	return cur
+def end(reason='exit'):
+	stdwrite_string('ERROR: ',pre=[clr.red,clr.bold,clr.blink],post=[clr.reset])
+	stdwrite_string(reason ,pre=[clr.red,clr.bold,],post=[clr.reset])
+	print('\n\n')
+	exit()
 
 def rmr(path) -> None:
 	shutil.rmtree(path)
@@ -232,25 +206,21 @@ def link(src,lnk,rel=False) -> None:
 		src=f"{'./' if len(lnk.split('/')[common:-1])<1 else ''}{'/'.join(['..' for folder in lnk.split('/')[common:-1]]+src.split('/')[common:-1]+[os.path.split(src)[1]])}"
 	os.symlink(src,lnk)
 
-def portal(src, dst, method, force, rel) -> None:
-	ar_dst=os.path.abspath(os.path.realpath(dst)) #a(bsolute)r(eal)_dst
-	if os.path.islink(src):
-		end(reason=f'ERROR: source ({src}) is a link')
+def portal(src, dst, rel=False) -> None:
+	dst=os.path.abspath(os.path.realpath(os.path.expanduser(os.path.expandvars(dst)))) #a(bsolute)r(eal)_dst
+	src=os.path.abspath(os.path.realpath(os.path.expanduser(os.path.expandvars(src))))
+	fulldst=os.path.join(dst,os.path.basename(src))
 	if os.path.abspath(dst) == os.path.abspath(src):
-		end(reason=f'ERROR source({src}) and destination({dst}) are the same')
-	copy=(force(cpy, src, dst) if force else end(reason=f'ERROR {os.path.abspath(dst)} exists (use --force to overwrite)')) if os.path.exists(dst)	else cpy
-	methods={
-		'bind' : bind,
-		'link'	: link,
-		}
-	method=methods[method]
-	copy(src,dst)
-	rmr(src)
-	method(dst,src,rel)
+		end(reason=f'ERROR source({src}) and destination({dst}) are the same or nested')
+	if not os.path.exists(dst)	:
+		os.makedirs(dst)
+	cpy(src,fulldst)
+	
+	os.renames(src,os.path.join(os.path.dirname(src),f'{os.path.basename(src)}.backup001'))
+	link(fulldst,src)
+	#rmr(src)
 
-
-
-cpy('/home/hoefkens/tmp/', '/home/hoefkens/tmpcopy/')
+portal('/home/hoefkens/tmp/', '/home/hoefkens/tmp2copy')
 
 
 
