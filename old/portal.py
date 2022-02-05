@@ -1,14 +1,20 @@
 #!/usr/bin/env python
-import os,sys,shlex,shutil
+import os
+import shlex
 import subprocess
 import time
 import timeit
+import re
+import sys
 import termios
 import tty
-import re
 import types
-
+import shutil
 debug_slow=0
+
+print('\n')
+
+
 def std_cursorloc():
 
     buf = ""
@@ -36,11 +42,23 @@ def std_cursorloc():
         return None
 
     return (int(groups[0]), int(groups[1]))
-def stdwrite_org(ansi):
+
+def stdwrite_org_H(ANSI_cursor):
+	ansi='\033[{n};{m}H'.format(n=ANSI_cursor[0],m=ANSI_cursor[1])
 	def stdout_ansi():
+		sys.stdout.flush()
 		sys.stdout.write(ansi)
 		sys.stdout.flush()
 	return stdout_ansi
+	
+def stdwrite_org_G(ANSI_cursor):
+	ansi='\033[{n}G'.format(n=ANSI_cursor)
+	def stdout_ansi():
+		sys.stdout.flush()
+		sys.stdout.write(ansi)
+		sys.stdout.flush()
+	return stdout_ansi
+
 def stdwrite_string(text, **k):
 	def dummy(): pass
 	color=k.get('ANSI_Color')
@@ -52,6 +70,7 @@ def stdwrite_string(text, **k):
 		sys.stdout.flush()
 		[post()for post in fn_post]
 	return stdout_text()
+
 def stdwrite_color(ANSI_color):
 	ansi='\033[{}m'.format(ANSI_color)
 	def stdout_color():
@@ -60,66 +79,69 @@ def stdwrite_color(ANSI_color):
 		sys.stdout.flush()
 	return stdout_color
 
-
-def sns_org(**k):
+def ANSI_cursor(**k):
+	termwidth = shutil.get_terminal_size()[0]
+	col_1 = (1, ((termwidth / 2) - 1))
+	col_2 = (((termwidth / 2) + 1), (termwidth - 1))
 	def defaults():
-			k['DEFAULT'] = {'t1': 1, 't2': 24, 'ts': 12}
+			k['DEFAULT'] = {'t1': col_1[0], 't2': col_2[0], 'ts': 12}
 			k['t1'] = k.get('t1') or k['DEFAULT'].get('t1')
 			k['t2'] = k.get('t2') or k['DEFAULT'].get('t2')
 			k['ts'] = k.get('ts') or k['DEFAULT'].get('ts')
 	defaults()
 	org = types.SimpleNamespace()
-	curs_init_row=std_cursorloc()[0]
-	curs_init_col=std_cursorloc()[1]
-	org.init						=	stdwrite_org('\033[{n};{m}H'.format(n=(curs_init_row-2),m=curs_init_col))
-	# ROWS:
-	org.header					=	stdwrite_org('\033[{};1H'.format(curs_init_row-2))
-	org.progress				=	stdwrite_org('\033[{};1H'.format((curs_init_row-1)))
+	curs_init_row= std_cursorloc()[0]
+	curs_init_col= std_cursorloc()[1]
+	org.init						=	stdwrite_org_H([(curs_init_row-2),curs_init_col])	# ROWS:
+	org.header					=	stdwrite_org_H([(curs_init_row-2),1])
+	org.progress				=	stdwrite_org_H([(curs_init_row-1),1])
 	# COLS
-	org.title_1					=	stdwrite_org('\033[{}G'.format(k.get('t1')))
-	org.title_1_stat		=	stdwrite_org('\033[{}G'.format(k.get('t1')+k.get('ts')))
-	org.title_2					=	stdwrite_org('\033[{}G'.format(k.get('t2')))
-	org.title_2_stat		=	stdwrite_org('\033[{}G'.format(k.get('t2')+k.get('ts')))
-	org.proc						=	stdwrite_org('\033[{}G'.format(k.get('ts')))
-	org.count						=	stdwrite_org('\033[{}G'.format(2+k.get('ts')))
+	org.title_1					=	stdwrite_org_G((k.get('t1')))
+	org.title_1_stat		=	stdwrite_org_G((k.get('t1')+k.get('ts')))
+	org.title_2					=	stdwrite_org_G((k.get('t2')))
+	org.title_2_stat		=	stdwrite_org_G((k.get('t2')+k.get('ts')))
+	org.proc						=	stdwrite_org_G((k.get('ts')))
+	org.count						=	stdwrite_org_G((k.get('ts')+2))
 	return org
-def sns_clr():
-	clr=types.SimpleNamespace()
-	clr.blink=stdwrite_color('5')
-	clr.noblink=stdwrite_color('25')
-	clr.gray=stdwrite_color('30')
-	clr.red=stdwrite_color('31')#38;5;14
-	clr.green=stdwrite_color('32')
-	clr.yellow=stdwrite_color('33')
-	clr.blue=stdwrite_color('34')
 
-	clr.reset=stdwrite_color('0')
-	clr.bold=stdwrite_color('1')
-	clr.ital=stdwrite_color('2')
-	clr.underline=stdwrite_color('4')
-	clr.inv=stdwrite_color('7')
-	clr.strike=stdwrite_color('9')
-	clr.dunno=stdwrite_color('9')
+def ANSI_style():
+	clr=types.SimpleNamespace()
+	clr.reset			=stdwrite_color('0')
+	clr.bold			=stdwrite_color('1')
+	clr.ital			=stdwrite_color('2')
+	clr.underline	=stdwrite_color('4')
+	clr.blink			=stdwrite_color('5')
+	clr.inv				=stdwrite_color('7')
+	clr.strike		=stdwrite_color('9')
+	clr.dunno			=stdwrite_color('9')
+	
+	clr.noblink		=stdwrite_color('25')
+	
+	clr.gray			=stdwrite_color('30')
+	clr.red				=stdwrite_color('31')
+	clr.green			=stdwrite_color('32')
+	clr.yellow		=stdwrite_color('33')
+	clr.blue			=stdwrite_color('34')
 	
 	return clr
-print('\n')
 
-org=sns_org()
-clr=sns_clr()
+org= ANSI_cursor()
+clr= ANSI_style()
+
 
 def cpy(srcdir, dest,force=False) -> None:
 	"""
 	copy progress
 	"""
-	def cli_count(path="."):
+	def cli_count(path):
 		org.progress()
 		total = [count(len(d) + len(f)) for p,d,f in os.walk(path,topdown=True)]
 		return total[-1]-1
 	def count(add,tot=[]):
 		global debug_slow
 		tot += [add]
-		stdwrite_string(str(sum(tot)),pre=[org.progress,org.count,clr.red],post=[clr.reset])
-		stdwrite_string(']',pre=[clr.reset],post=[clr.reset])
+		stdwrite_string(str(sum(tot)), pre=[org.progress, org.count, clr.red], post=[clr.reset])
+		stdwrite_string(']', pre=[clr.reset], post=[clr.reset])
 		time.sleep(debug_slow)
 		return sum(tot)
 	def cp(srcdir, dest) -> None:
@@ -137,54 +159,52 @@ def cpy(srcdir, dest,force=False) -> None:
 	def progress(path, tot, cur):
 		global debug_slow
 		cur= str(cur).zfill(len(str(tot)))
-		def format_path(path):
-			termwidth=shutil.get_terminal_size()[0]
-			stringwidth=termwidth-(36+(2*len(str(tot))))
-			if len(path) > (stringwidth-3):
-				path=f'...{path[-(stringwidth-6):]}'
-			return path.rjust(stringwidth-6)
-		ppath=format_path(path)
-		stdwrite_string('Progress: '				,pre=[org.progress,clr.bold],post=[clr.reset])
+		ppath=format_path(tot, path)
+		stdwrite_string('Progress: ', pre=[org.progress, clr.bold], post=[clr.reset])
 		stdwrite_string('[')
-		stdwrite_string(cur									,pre=[org.proc,clr.green],post=[clr.reset])
+		stdwrite_string(cur, pre=[org.proc, clr.green], post=[clr.reset])
 		stdwrite_string('/')
-		stdwrite_string(str(tot)						,pre=[clr.green],post=[clr.reset])
+		stdwrite_string(str(tot), pre=[clr.green], post=[clr.reset])
 		stdwrite_string(']')
-		stdwrite_string('File: '						,pre=[org.title_2,clr.bold],post=[clr.reset])
-		stdwrite_string(ppath								,pre=[org.title_2_stat,clr.blue],post=[clr.reset])
+		stdwrite_string('File: ', pre=[org.title_2, clr.bold], post=[clr.reset])
+		stdwrite_string(ppath, pre=[org.title_2_stat, clr.blue], post=[clr.reset])
 		time.sleep(debug_slow)
 		return cur
+	def format_path(tot, path):
+		termwidth=shutil.get_terminal_size()[0]
+		stringwidth=termwidth-(36+(2*len(str(tot))))
+		if len(path) > (stringwidth-3):
+			path=f'...{path[-(stringwidth-6):]}'
+		return path.rjust(stringwidth-6)
 	
-	
-	stdwrite_string('Checking: '					,pre=[org.init,	org.header,	org.title_1,clr.bold],post=[clr.reset])
-	stdwrite_string('PENDING'							,pre=[org.title_1_stat])
-	stdwrite_string('Processing: '				,pre=[org.title_2,clr.bold],post=[clr.reset])
-	stdwrite_string('PENDING'							,pre=[org.title_2_stat])
-	stdwrite_string('Progress: '					,pre=[org.progress,clr.bold],)
-	stdwrite_string('['										,pre=[clr.reset])
-	stdwrite_string('0'										,pre=[org.proc,clr.reset])
+	stdwrite_string('Checking: ', pre=[org.init, org.header, org.title_1, clr.bold], post=[clr.reset])
+	stdwrite_string('PENDING', pre=[org.title_1_stat])
+	stdwrite_string('Processing: ', pre=[org.title_2, clr.bold], post=[clr.reset])
+	stdwrite_string('PENDING', pre=[org.title_2_stat])
+	stdwrite_string('Progress: ', pre=[org.progress, clr.bold], )
+	stdwrite_string('[', pre=[clr.reset])
+	stdwrite_string('0', pre=[org.proc, clr.reset])
 	stdwrite_string('/')
-	stdwrite_string('0'										,pre=[org.count])
-	stdwrite_string(']'										,post=[clr.reset])
-	stdwrite_string('BUSY'.ljust(11," ")	,pre=[org.init,org.header,org.title_1_stat,clr.red,clr.blink],post=[clr.noblink,clr.reset])
+	stdwrite_string('0', pre=[org.count])
+	stdwrite_string(']', post=[clr.reset])
+	stdwrite_string('BUSY'.ljust(11, " "), pre=[org.init, org.header, org.title_1_stat, clr.red, clr.blink], post=[clr.noblink, clr.reset])
 	tot=cli_count(path=srcdir)
-	stdwrite_string('Done'								,pre=[org.header,	org.title_1_stat,	clr.green],post=[clr.reset])
-	stdwrite_string('Processing: '				,pre=[org.title_2,clr.bold],post=[clr.reset])
-	stdwrite_string('BUSY'.ljust(12," ")	,pre=[org.title_2_stat,	clr.red,	clr.blink],post=[clr.noblink,	clr.reset])
+	stdwrite_string('Done', pre=[org.header, org.title_1_stat, clr.green], post=[clr.reset])
+	stdwrite_string('Processing: ', pre=[org.title_2, clr.bold], post=[clr.reset])
+	stdwrite_string('BUSY'.ljust(12, " "), pre=[org.title_2_stat, clr.red, clr.blink], post=[clr.noblink, clr.reset])
 	start_timer=timeit.default_timer()
 	cur=[progress(path,tot,idx) for idx,path in enumerate(cp(srcdir, dest))]
 	end_timer=timeit.default_timer()
-	stdwrite_string('Done'.ljust(12," ")	,pre=[org.header,	org.title_2_stat,clr.green],post=[clr.reset])
-	stdwrite_string('Finished: '					,pre=[org.progress,org.title_2,clr.bold],post=[clr.reset])
-	stdwrite_string(f'Copied {tot} Files in {end_timer-start_timer} s',pre=[org.title_2_stat,clr.blue],post=[clr.reset])
+	stdwrite_string('Done'.ljust(12, " "), pre=[org.header, org.title_2_stat, clr.green], post=[clr.reset])
+	stdwrite_string('Finished: ', pre=[org.progress, org.title_2, clr.bold], post=[clr.reset])
+	stdwrite_string(f'Copied {tot} Files in {end_timer - start_timer} s', pre=[org.title_2_stat, clr.blue], post=[clr.reset])
 	stdwrite_string('\n\n')
 
 
 
-
 def end(reason='exit'):
-	stdwrite_string('ERROR: ',pre=[clr.red,clr.bold,clr.blink],post=[clr.reset])
-	stdwrite_string(reason ,pre=[clr.red,clr.bold,],post=[clr.reset])
+	stdwrite_string('ERROR: ', pre=[clr.red, clr.bold, clr.blink], post=[clr.reset])
+	stdwrite_string(reason, pre=[clr.red, clr.bold, ], post=[clr.reset])
 	print('\n\n')
 	exit()
 
@@ -220,7 +240,7 @@ def portal(src, dst, rel=False) -> None:
 	link(fulldst,src)
 	#rmr(src)
 
-portal('/home/hoefkens/tmp/', '/home/hoefkens/tmp2copy')
+portal('/etc/btrwin', '/home/hoefkens/tmp2copy')
 
 
 

@@ -1,4 +1,0 @@
-datum						linker oog				rechter oog					nieuw doosje	
-20151008						x						x							x			
-20151110						0						x							0			
-20151129						0						x							0			

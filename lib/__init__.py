@@ -1,3 +1,2 @@
 #!/usr/bin/env python
-from . import cpy
-from . import lib
+from . import lib_cli

@@ -26,7 +26,6 @@ def copy(src, dst) -> None:
 	:param dst: destination
 	
 	"""
-	import portal.fnx
 	fnx.cpy.cpy_cli()
 sys.stdout.write('\u001b[1E')
 sys.stdout.write('Portal: \u001b[32mCopy\u001b[0m')
