@@ -12,36 +12,30 @@ import types
 import shutil
 debug_slow=0
 
-print('\n')
 
 
 def std_cursorloc():
-
-    buf = ""
-    stdin = sys.stdin.fileno()
-    tattr = termios.tcgetattr(stdin)
-
-    try:
-        tty.setcbreak(stdin, termios.TCSANOW)
-        sys.stdout.write("\x1b[6n")
-        sys.stdout.flush()
-        while True:
-            buf += sys.stdin.read(1)
-            if buf[-1] == "R":
-                break
-
-    finally:
-        termios.tcsetattr(stdin, termios.TCSANOW, tattr)
-
-    # reading the actual values, but what if a keystroke appears while reading
-    # from stdin? As dirty work around, getpos() returns if this fails: None
-    try:
-        matches = re.match(r"^\x1b\[(\d*);(\d*)R", buf)
-        groups = matches.groups()
-    except AttributeError:
-        return None
-
-    return (int(groups[0]), int(groups[1]))
+	buf = ""
+	stdin = sys.stdin.fileno()
+	tattr = termios.tcgetattr(stdin)
+	try:
+		tty.setcbreak(stdin, termios.TCSANOW)
+		sys.stdout.write("\x1b[6n")
+		sys.stdout.flush()
+		while True:
+			buf += sys.stdin.read(1)
+			if buf[-1] == "R":
+				break
+	finally:
+		termios.tcsetattr(stdin, termios.TCSANOW, tattr)
+	# reading the actual values, but what if a keystroke appears while reading
+	# from stdin? As dirty work around, getpos() returns if this fails: None
+	try:
+		matches = re.match(r"^\x1b\[(\d*);(\d*)R", buf)
+		groups = matches.groups()
+	except AttributeError:
+		return None
+	return (int(groups[0]), int(groups[1]))
 
 def stdwrite_org_H(ANSI_cursor):
 	ansi='\033[{n};{m}H'.format(n=ANSI_cursor[0],m=ANSI_cursor[1])
@@ -58,7 +52,13 @@ def stdwrite_org_G(ANSI_cursor):
 		sys.stdout.write(ansi)
 		sys.stdout.flush()
 	return stdout_ansi
-
+def stdwrite_org_K(ANSI_cursor):
+	ansi='\033[{n}K'.format(n=ANSI_cursor)
+	def stdout_ansi():
+		sys.stdout.flush()
+		sys.stdout.write(ansi)
+		sys.stdout.flush()
+	return stdout_ansi
 def stdwrite_string(text, **k):
 	def dummy(): pass
 	color=k.get('ANSI_Color')
@@ -79,29 +79,21 @@ def stdwrite_color(ANSI_color):
 		sys.stdout.flush()
 	return stdout_color
 
-def ANSI_cursor(**k):
-	termwidth = shutil.get_terminal_size()[0]
-	col_1 = (1, ((termwidth / 2) - 1))
-	col_2 = (((termwidth / 2) + 1), (termwidth - 1))
-	def defaults():
-			k['DEFAULT'] = {'t1': col_1[0], 't2': col_2[0], 'ts': 12}
-			k['t1'] = k.get('t1') or k['DEFAULT'].get('t1')
-			k['t2'] = k.get('t2') or k['DEFAULT'].get('t2')
-			k['ts'] = k.get('ts') or k['DEFAULT'].get('ts')
-	defaults()
-	org = types.SimpleNamespace()
-	curs_init_row= std_cursorloc()[0]
-	curs_init_col= std_cursorloc()[1]
-	org.init						=	stdwrite_org_H([(curs_init_row-2),curs_init_col])	# ROWS:
-	org.header					=	stdwrite_org_H([(curs_init_row-2),1])
-	org.progress				=	stdwrite_org_H([(curs_init_row-1),1])
+def ANSI_cursor(F1=1,L1=32,F2=33,L2=64,SO=12,termwidth=64,curs_init_row=3,curs_init_col=1):
+	org 								= types.SimpleNamespace()
+	org.init						=	stdwrite_org_H([(curs_init_row),curs_init_col])	# ROWS:
+	org.header					=	stdwrite_org_H([(curs_init_row+1),1])
+	org.progress				=	stdwrite_org_H([(curs_init_row+2),1])
 	# COLS
-	org.title_1					=	stdwrite_org_G((k.get('t1')))
-	org.title_1_stat		=	stdwrite_org_G((k.get('t1')+k.get('ts')))
-	org.title_2					=	stdwrite_org_G((k.get('t2')))
-	org.title_2_stat		=	stdwrite_org_G((k.get('t2')+k.get('ts')))
-	org.proc						=	stdwrite_org_G((k.get('ts')))
-	org.count						=	stdwrite_org_G((k.get('ts')+2))
+	org.title_1					=	stdwrite_org_G(F1)
+	org.title_1_stat		=	stdwrite_org_G(F1+SO)
+	org.title_2					=	stdwrite_org_G(F2)
+	org.title_2_stat		=	stdwrite_org_G(F2+SO)
+	org.proc						=	stdwrite_org_G(SO)
+	org.count						=	stdwrite_org_G(SO+2)
+
+	org.clr_left				=	stdwrite_org_K(1)
+	org.clr_right					=	stdwrite_org_K(2)
 	return org
 
 def ANSI_style():
@@ -125,6 +117,13 @@ def ANSI_style():
 	
 	return clr
 
+
+def init_tty():
+	try:
+		termwidth=shutil.get_terminal_size()[0]
+	except Exception as E:
+		print(E)
+
 org= ANSI_cursor()
 clr= ANSI_style()
 
@@ -136,7 +135,8 @@ def cpy(srcdir, dest,force=False) -> None:
 	def cli_count(path):
 		org.progress()
 		total = [count(len(d) + len(f)) for p,d,f in os.walk(path,topdown=True)]
-		return total[-1]-1
+		
+		return total[0]-1
 	def count(add,tot=[]):
 		global debug_slow
 		tot += [add]
@@ -197,7 +197,7 @@ def cpy(srcdir, dest,force=False) -> None:
 	end_timer=timeit.default_timer()
 	stdwrite_string('Done'.ljust(12, " "), pre=[org.header, org.title_2_stat, clr.green], post=[clr.reset])
 	stdwrite_string('Finished: ', pre=[org.progress, org.title_2, clr.bold], post=[clr.reset])
-	stdwrite_string(f'Copied {tot} Files in {end_timer - start_timer} s', pre=[org.title_2_stat, clr.blue], post=[clr.reset])
+	stdwrite_string(f'Copied {tot} Files in {end_timer - start_timer} s', pre=[org.title_2_stat,org.clr_right, clr.blue], post=[clr.reset])
 	stdwrite_string('\n\n')
 
 
@@ -234,14 +234,15 @@ def portal(src, dst, rel=False) -> None:
 		end(reason=f'ERROR source({src}) and destination({dst}) are the same or nested')
 	if not os.path.exists(dst)	:
 		os.makedirs(dst)
+	stdwrite_string('PORTAL:\n' , pre=[clr.bold, clr.blue], post=[clr.reset])
 	cpy(src,fulldst)
 	
 	os.renames(src,os.path.join(os.path.dirname(src),f'{os.path.basename(src)}.backup001'))
 	link(fulldst,src)
 	#rmr(src)
 
-portal('/etc/btrwin', '/home/hoefkens/tmp2copy')
-
+# portal('~/ikkel/', '/home/hoefkens/tmp2copy')
+portal('/home/hoefkens/' ,'~/tmp9copyl/')
 
 
 

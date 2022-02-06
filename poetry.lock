@@ -148,6 +148,14 @@ docs = ["Sphinx (>=4)", "furo (>=2021.7.5b38)", "proselint (>=0.10.2)", "sphinx-
 test = ["appdirs (==1.4.4)", "pytest (>=6)", "pytest-cov (>=2.7)", "pytest-mock (>=3.6)"]
 
 [[package]]
+name = "pudo"
+version = "1.1.0"
+description = "Python version of linux sudo command without password prompt"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "pylint"
 version = "2.12.2"
 description = "python code static checker"
@@ -221,7 +229,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "e66c241bd73b2844c46f229d2c1b94031e7bdd0a9d2010d0a01598cb3fabe22f"
+content-hash = "1213eb34ef8184c3eded00a3732978190df01ecafc5980a25c25d4ad9ff8294c"
 
 [metadata.files]
 astroid = [
@@ -375,6 +383,9 @@ mccabe = [
 platformdirs = [
     {file = "platformdirs-2.4.1-py3-none-any.whl", hash = "sha256:1d7385c7db91728b83efd0ca99a5afb296cab9d0ed8313a45ed8ba17967ecfca"},
     {file = "platformdirs-2.4.1.tar.gz", hash = "sha256:440633ddfebcc36264232365d7840a970e75e1018d15b4327d11f91909045fda"},
+]
+pudo = [
+    {file = "pudo-1.1.0.tar.gz", hash = "sha256:db8e423532bac17399635f02b7613c23cd47c87adb387c8d0f10ae70f97c1f15"},
 ]
 pylint = [
     {file = "pylint-2.12.2-py3-none-any.whl", hash = "sha256:daabda3f7ed9d1c60f52d563b1b854632fd90035bcf01443e234d3dc794e3b74"},

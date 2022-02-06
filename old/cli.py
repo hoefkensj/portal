@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-import os
-from . import portal
+from fnx import portal
 import click as C
 
 
@@ -21,4 +20,4 @@ def cli(src,dst,f_method,f_force,rel) -> None:
 	:param rel: creates symlink relative to src
 	:return: None
 	"""
-	portal.portal(src,dst,f_method,f_force,rel)
+	portal.portal(src, dst, f_method, f_force, rel)
