@@ -139,14 +139,15 @@ def ANSI_org(loc,ALLOC=4,colw=24,termwidth=64):
 	'header'			:	f"{ORG['sec']}" ,
 	'progress'		:	f"{ORG['bot']}" ,
 	
-	'tit1'				:	f"{ORG['top']}{ORG['c11']}" ,
-	'tit1_stat'		:	f"{ORG['top']}{ORG['c12']}" ,
-	'tit2'				:	f"{ORG['top']}{ORG['c21']}" ,
-	'tit2_stat'		:	f"{ORG['top']}{ORG['c22']}" ,
-	'count'				:	f"{ORG['bot']}{ORG['c11']}" ,
+	'tit1'				:	f"{ORG['sec']}{ORG['c11']}" ,
+	'tit1_stat'		:	f"{ORG['sec']}{ORG['c12']}" ,
+	'tit2'				:	f"{ORG['sec']}{ORG['c21']}" ,
+	'tit2_stat'		:	f"{ORG['sec']}{ORG['c22']}" ,
+	'prog'				:	f"{ORG['bot']}{ORG['c11']}{ANSI_G(2)}",
+	'count'				:	f"{ORG['bot']}{ORG['c11']}{ANSI_G(4)}" ,
 	
 	'proc'				:	f"{ORG['bot']}{ORG['c21']}",
-	'proc_file'		:	f"{ORG['bot']}{ORG['c21']}",
+	'proc_file'		:	f"{ORG['bot']}{ORG['c22']}",
 
 	'clr_left'		:	ANSI_K(1),
 	'clr_right'		:	ANSI_K(2),
@@ -208,9 +209,9 @@ def cpy(src, dst, force=False) -> None:
 	tot=cli_count(org, count, path=src)
 	stdout_write('Done', 													org='tit1_stat',							style=['green'],)
 	stdout_write('Processing: ', 									org='tit2',										style=['bold'], )
-	stdout_write('BUSY'.ljust(12, " "), 					org='tit2_stat',							style=[' red',' blink'],)
+	stdout_write('BUSY'.ljust(12, " "), 					org='tit2_stat',							style=['red',' blink'],)
 	start_timer=timeit.default_timer()
-	cur=['progress(org','  path, tot, idx) for idx, path in enumerate(cp(src, dst))']
+	cur=[progress(org, clr, path, tot, idx) for idx, path in enumerate(cp(src, dst))]
 	end_timer=timeit.default_timer()
 	stdout_write('Done'.ljust(12, " "), style=['org.header',' tit2_stat, green'], )
 	stdout_write('Finished: ', style=['org.progress',' tit2, bold'], )
