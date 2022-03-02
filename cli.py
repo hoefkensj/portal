@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-from . import portal
+import main
 import click as C
 
 
@@ -21,4 +21,7 @@ def cli(src,dst,f_method,f_force,rel) -> None:
 	:param rel: creates symlink relative to src
 	:return: None
 	"""
-	portal.portal(src,dst,f_method,f_force,rel)
+	main.portal(src, dst, f_method, f_force, rel)
+	
+	
+	@C.group('link')
