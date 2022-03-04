@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
-import lib
-import fnx.portal_link
+import portal.lib
+import portal.fnx.portal_link
 
 
 def force(method,src,dst):
@@ -26,6 +26,7 @@ def portal(src, dst, method, force, rel) -> None:
 		'bind' : bind,
 		'link'	: fnx.portal_link.link,
 		}
+		
 	method=methods[method]
 	copy(src,dst)
 	rmr(src)

@@ -131,7 +131,7 @@ def TERM_init(**k):
 		return SEG
 	return segment
 
-def ANSI_org(loc,ALLOC=4,colw=24,termwidth=64):
+def org(loc,ALLOC=4,colw=24,termwidth=64):
 	TERM=TERM_init(allocate=ALLOC,colw=colw)
 	ORG= TERM()
 	orgs={
@@ -156,7 +156,7 @@ def ANSI_org(loc,ALLOC=4,colw=24,termwidth=64):
 
 def stdout_write(*a,**k):
 	def write(*a,**k):
-		sys.stdout.write(ANSI_org(str(k.get('org'))))
+		sys.stdout.write(org(str(k.get('org'))))
 		sys.stdout.write(style(*a,**k))
 		sys.stdout.write(ANSI_style('reset'))
 		sys.stdout.flush()
@@ -207,15 +207,15 @@ def cpy(src, dst, force=False) -> None:
 	stdout_write(txt=']',)
 	stdout_write(txt='BUSY'.ljust(11," "), 				org='tit1_stat',							style=['red',' blink'], )
 	tot=cli_count(org, count, path=src)
-	stdout_write('Done', 													org='tit1_stat',							style=['green'],)
-	stdout_write('Processing: ', 									org='tit2',										style=['bold'], )
-	stdout_write('BUSY'.ljust(12, " "), 					org='tit2_stat',							style=['red',' blink'],)
+	stdout_write(txt='Done', 													org='tit1_stat',							style=['green'],)
+	stdout_write(txt='Processing: ', 									org='tit2',										style=['bold'], )
+	stdout_write(txt='BUSY'.ljust(12, " "), 					org='tit2_stat',							style=['red',' blink'],)
 	start_timer=timeit.default_timer()
-	cur=[progress(org, clr, path, tot, idx) for idx, path in enumerate(cp(src, dst))]
+	cur=[progress(org, style, path, tot, idx) for idx, path in enumerate(cp(src, dst))]
 	end_timer=timeit.default_timer()
-	stdout_write('Done'.ljust(12, " "), style=['org.header',' tit2_stat, green'], )
-	stdout_write('Finished: ', style=['org.progress',' tit2, bold'], )
-	stdout_write(f'Copied {tot} Files in {end_timer - start_timer} s', style=['tit2_stat','org.right, blue'], )
+	stdout_write(txt='Done'.ljust(12, " "), style=['org.header',' tit2_stat, green'], )
+	stdout_write(txt='Finished: ', style=['org.progress',' tit2, bold'], )
+	stdout_write(txt=f'Copied {tot} Files in {end_timer - start_timer} s', style=['tit2_stat','org.right, blue'], )
 	stdout_write('\n\n')
 
 def progress(org, clr, path, tot, cur):
@@ -223,14 +223,14 @@ def progress(org, clr, path, tot, cur):
 	cur= str(cur).zfill(len(str(tot)))
 	ppath=format_path(path)
 	
-	stdwrite_string('Progress: ', pre=[org.progress, clr.bold], post=[clr.reset])
-	stdwrite_string('[')
-	stdwrite_string(cur, pre=[org.proc, clr.red], post=[clr.reset])
-	stdwrite_string('/')
-	stdwrite_string(str(tot), pre=[clr.green], post=[clr.reset])
-	stdwrite_string(']')
-	stdwrite_string('File: ', pre=[tit2, clr.bold], post=[clr.reset])
-	stdwrite_string(ppath, pre=[tit2_file, clr.yellow], post=[clr.reset])
+	stdout_write(txt='Progress: ', pre=[org.progress, clr.bold], post=[clr.reset])
+	stdout_write(txt='[')
+	stdout_write(cur, pre=[org.proc, clr.red], post=[clr.reset])
+	stdout_write(txt='/')
+	stdout_write(txt=str(tot), pre=[clr.green], post=[clr.reset])
+	stdout_write(txt=']')
+	stdout_write(txt='File: ', pre=[tit2, clr.bold], post=[clr.reset])
+	stdout_write(ppath, pre=[tit2_file, clr.yellow], post=[clr.reset])
 	time.sleep(debug_slow)
 	return cur
 

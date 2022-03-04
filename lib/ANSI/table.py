@@ -3,6 +3,7 @@
 import shutil
 import time
 import sys
+
 def fn(fn):
 	def ansi(SEQ):
 		def ANSIseq(ESC='\033', SEQ='{SEQ}', FN='{FN}'):
@@ -17,21 +18,6 @@ ANSI_F= fn('F')
 ANSI_G= fn('G')
 ANSI_H= fn('H')
 ANSI_K= fn('K')
-
-
-
-
-def tabledata_width(**k):
-	flags=k.get('flags')
-	#sym shrink idx mark
-	pass
-	
-def terminal_width(**k):
-	stored=k.get('stored')
-	width=(shutil.get_terminal_size()[0]-2)
-	stored+=[width]
-	diff=(-1*(stored[-2]-stored[-1]))
-	return stored
 
 table1={
 		'T' : [['title'],['subtitle']], 								# T TITLES
@@ -67,7 +53,41 @@ table2={
 					],
 		'F'	:	[['help'],['footer']]
 	}
-cols={}
+
+
+def terminal_width(**k):
+	stored=k.get('stored')
+	width=(shutil.get_terminal_size()[0]-2)
+	stored+=[width]
+	diff=(-1*(stored[-2]-stored[-1]))
+	return stored
+
+
+def std_cursorloc():
+	import termios
+	import tty
+	import re
+	buf = ""
+	stdin = sys.stdin.fileno()
+	tattr = termios.tcgetattr(stdin)
+	try:
+		tty.setcbreak(stdin, termios.TCSANOW)
+		sys.stdout.write("\x1b[6n")
+		sys.stdout.flush()
+		while True:
+			buf += sys.stdin.read(1)
+			if buf[-1] == "R":
+				break
+	finally:
+		termios.tcsetattr(stdin, termios.TCSANOW, tattr)
+	# reading the actual values, but what if a keystroke appears while reading
+	# from stdin? As dirty work around, getpos() returns if this fails: None
+	try:
+		matches = re.match(r"^\x1b\[(\d*);(\d*)R", buf)
+		groups = matches.groups()
+	except AttributeError:
+		return None
+	return (int(groups[0]), int(groups[1]))
 
 def presets_re():
 	import types
@@ -84,7 +104,6 @@ def tty_len(**k):
 	s=re.repl_ESCt(wtab,str(s))
 	s=re.repl_ANSIm('',str(s))
 	return len(s)
-
 
 def calc_dimensions(**k):
 	"""
@@ -109,8 +128,6 @@ def calc_dimensions(**k):
 	
 	ncolls	=	len(tbl_headers)
 	nrows		=	len(tbl_data)
-	skel_colls=[0 for i in range(ncolls)]
-	skel_rows	=[0 for i in range(nrows)]
 	
 	def calc_padding() -> list:
 		if al=='left' or al == 'right':
@@ -150,20 +167,45 @@ def calc_dimensions(**k):
 		lst_cellbwidths=[0,]+[i+tty_len(s=fs) for i in calc_cellwidths()]
 		lst_leftbounds+=[lst_cellbwidths[i]+cell+tty_len(s=fs) for i,cell in enumerate(calc_cellwidths()[:-1])]
 		return lst_leftbounds
+	
 	def calc_borderorg():
 		borderb=[x-tty_len(s=fs) for x in calc_leftbounds()[1:]]
 		return borderb
 		
-	for i,header in enumerate(tbl_headers):
-		sys.stdout.write(f'\033[{calc_leftbounds()[i]}G{header.ljust(len(header)+calc_cellwidths()[i]," ")}')
-	sys.stdout.write('\n')
+
+	tpl_org=std_cursorloc()
+	tbl_org=ANSI_H(f'{tpl_org[1]};{tpl_org[0]}')
+	tpl_org=std_cursorloc()
+	dat_org=ANSI_H(f'{tpl_org[1]+2};{tpl_org[0]}')
+	lst_lbounds=calc_leftbounds()
+	lst_cellwidths=calc_cellwidths()
+	lst_borderorg=calc_borderorg()
+	
+	def calc_locs():
+		H = [ANSI_G(lst_lbounds[i])for i,header in enumerate(tbl_headers)]
+		matrix_dataloc=[]
+		for r,row in enumerate(tbl_data):
+			loc_row=[]
+			for c,cell in enumerate(tbl_data[r]):
+				loc_row+=[f'{dat_org}{ANSI_F(r)}{ANSI_G(calc_leftbounds()[c])}']
+		matrix_dataloc+=loc_row
+		return matrix_dataloc
+	
+	print('locs:',calc_locs())
+	matrix_locs=calc_locs()
 	for r,row in enumerate(tbl_data):
 		for c,cell in enumerate(row):
-			sys.stdout.write(f'\033[{calc_leftbounds()[c]}G{cell}')
-		for b,border in enumerate(calc_borderorg()):
-			sys.stdout.write(f'\033[0m\033[{calc_borderorg()[b]}G{fs}')
-		sys.stdout.write('\n')
-	
+			sys.stdout.write(f'{matrix_locs[r][c]}{tbl_data[r][c]}')
+		
+		
+		
+	def tmp():
+		for r,row in enumerate(tbl_data):
+			for c,cell in enumerate(row):
+				sys.stdout.write(f'\033[{calc_leftbounds()[c]}G{cell}')
+			for b,border in enumerate(calc_borderorg()):
+				sys.stdout.write(f'\033[0m\033[{calc_borderorg()[b]}G{fs}')
+			sys.stdout.write('\n')
 
 
 

@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-import sys
 import types
-
 
 def fn(fn):
 	def ansi(SEQ):

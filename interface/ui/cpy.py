@@ -4,7 +4,7 @@
 #[CODE]
 import sys
 import click as C
-import fnx.cpy
+import portal.fnx.cpy
 
 @C.command()
 @C.argument('src',required=True,type=str)
