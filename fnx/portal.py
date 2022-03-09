@@ -98,7 +98,7 @@ def setstyle(**k):
 		return str(txt_styled.format(placeholder=text))
 	return stdout_text
 
-def style(*a,**k):
+def style(*a,**k):		def ():
  return txt_markup(text=k.get('txt') or a[0],m=k.get('style'))
 	
 def TERM_init(**k):
