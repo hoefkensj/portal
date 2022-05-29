@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import types
 
+
 def fn(fn):
 	def ansi(SEQ):
 		def ANSIseq(ESC='\033', SEQ='{SEQ}', FN='{FN}'):

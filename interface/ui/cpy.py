@@ -3,13 +3,16 @@
 '''	'''
 #[CODE]
 import sys
+
 import click as C
 import portal.fnx.cpy
+
 
 @C.command()
 @C.argument('src',required=True,type=str)
 @C.argument('dst',required=True,type=str)
-def copy(src, dst) -> None:
+@C.pass_context
+def copy(ctx,src, dst) -> None:
 	"""
 	\b
 	SRC = Source to copy
@@ -26,7 +29,9 @@ def copy(src, dst) -> None:
 	:param dst: destination
 	
 	"""
-	fnx.cpy.cpy_cli()
+	portal.fnx.cpy.cpy_cli()
+	
+	
 sys.stdout.write('\u001b[1E')
 sys.stdout.write('Portal: \u001b[32mCopy\u001b[0m')
 sys.stdout.write('\033[38;5;123m'+'Checking'+'\033[0m:')

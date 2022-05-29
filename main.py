@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import os
-import portal.lib
+
 import portal.fnx.portal_link
+import portal.lib
 
 
 def force(method,src,dst):

@@ -1,12 +1,11 @@
 #!/usr/bin/env python
-import os
-import sys
-import subprocess
-import shlex
 import base64
-
-
+import os
+import shlex
 from subprocess import Popen, PIPE
+import subprocess
+import sys
+
 
 def check_polkit():
 		return '/usr/bin/env pkexec' if os.path.exists('/usr/bin/pkexec') else '/usr/bin/env bash sudo -A'

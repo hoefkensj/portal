@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 import os
+import os
 import shutil
 
+import lib
 import lib.lib
+
 
 src='$HOME/.bashrc'
 def prep_src(src,**k):
@@ -30,8 +33,6 @@ def prep_src(src,**k):
 prep_src(src,flags='--copy-contents')
 
 #!/usr/bin/env python
-import os
-import lib
 
 def prep_dst(dst,src_meat,**k):
 	"""

@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import shutil
-import time
 import sys
+import time
+import time
+
 
 def fn(fn):
 	def ansi(SEQ):
@@ -260,7 +262,6 @@ for r,row in enumerate(tbl.data):
 		[(b(),std_wr(f'\033[0m{tbl.meta.fs}')) for b in calc.lst_stdw_fsorg]
 	std_wr('\n')
 
-import time
 row_next=tty_writesbl(s=M('10;10'))
 
 

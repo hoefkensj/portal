@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 import os
-import shlex
-import subprocess
-import time
-import timeit
 import re
+import shlex
+import shutil
+import subprocess
 import sys
 import termios
+import time
+import timeit
 import tty
 import types
-import shutil
+
 debug_slow=0.1
 
 def init_tty():
@@ -98,7 +99,7 @@ def setstyle(**k):
 		return str(txt_styled.format(placeholder=text))
 	return stdout_text
 
-def style(*a,**k):		def ():
+def style(*a,**k):
  return txt_markup(text=k.get('txt') or a[0],m=k.get('style'))
 	
 def TERM_init(**k):

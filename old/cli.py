@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-from fnx import portal
 import click as C
+from fnx import portal
 
 
 @C.command()

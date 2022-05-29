@@ -5,7 +5,6 @@
 import os
 
 
-
 def link(src,lnk,rel=False) -> None:
 	"""
 	checks if link location exists and removes anything that is there

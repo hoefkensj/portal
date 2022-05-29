@@ -11,7 +11,6 @@ import time
 import timeit
 
 
-
 def proc_copy(src,dst):
 	#test src to be file or folder or link
 	#abort if is link TODO:	choice -to copy link , and link to the link leaving the "data" untouched
@@ -76,10 +75,11 @@ def cpy_cli(src, dst)->None:
 	"""
 	copy progress
 	"""
-	
 
 	total= counter_cli(src, cli=True)
+	
 	sys.stdout.write(' \033[38;5;123mCopying:\033[0m\033[1E[')
+	
 	start_timer=timeit.default_timer()
 	cur=[progress_cli(line, sum(total), idx) for idx, line in enumerate(copy(src, dst))]
 	end_timer=timeit.default_timer()

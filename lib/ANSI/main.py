@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-import types
 import collections
 import string
-
+import types
 
 
 def main():

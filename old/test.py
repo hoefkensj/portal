@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
-import os,sys,shlex,shutil
-import subprocess
+import functools
 import multiprocessing
+import os, sys, shlex, shutil
+import subprocess
 import time
 import timeit
-import functools
+
 timer = timeit.default_timer
 
 def std_cursor(lines=[]):
